@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+  <link rel="stylesheet" href="style.css">
+  <link rel="icon" href="pestaña.png" type="image/png">
+  <title>Contact - Xander Web</title>
+  <style>
+    body {
+      font-family: 'Courier New', Courier, monospace;
+      background-color: #1c1c1c;
+      color: #fff;
+      margin: 0;
+    }
+
+    .contact-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      padding: 50px;
+      background-color: rgba(0, 0, 0, 0); 
+      border-radius: 10px;
+    }
+
+    .contact-container h1 {
+      margin-bottom: 20px;
+      font-size: 36px;
+      color: #c72a2a;
+      text-transform: uppercase;
+      font-weight: bold;
+    }
+
+    .contact-container p {
+      color: #ddd;
+      margin-bottom: 40px;
+      font-size: 18px;
+    }
+
+    .contact-form {
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+      max-width: 600px;
+      background-color: #333;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    }
+
+    .contact-form input, .contact-form textarea {
+      margin-bottom: 15px;
+      padding: 12px;
+      font-size: 16px;
+      border: 1px solid #f44336;
+      border-radius: 5px;
+      background: linear-gradient(135deg, #444, #2b2b2b);
+      color: white;
+      transition: background-color 0.3s ease, border 0.3s ease;
+      background-size: 400% 400%; 
+      animation: gradientBackground 6s ease infinite; 
+      border-image: linear-gradient(135deg, #f44336, #e70000);
+      border-image-slice: 1;
+    }
+
+    @keyframes gradientBackground {
+      0% {
+        background-position: 0% 50%;
+      }
+      50% {
+        background-position: 100% 50%;
+      }
+      100% {
+        background-position: 0% 50%;
+      }
+    }
+
+    .contact-form input:focus, .contact-form textarea:focus {
+      outline: none;
+      background-color: #444;
+      border-color: #e70000;
+      border-image: linear-gradient(135deg, #f44336, #e70000);
+      border-image-slice: 1;
+    }
+
+    .contact-form button {
+      padding: 12px;
+      background: linear-gradient(135deg, #e70000, #f44336);
+      color: white;
+      font-size: 16px;
+      border-radius: 5px;
+      cursor: pointer;
+      border: none;
+      transition: background-color 0.3s ease, background 0.3s ease;
+      background-size: 400% 400%;
+      animation: gradientButton 5s ease infinite;
+    }
+
+    @keyframes gradientButton {
+      0% {
+        background-position: 0% 50%;
+      }
+      50% {
+        background-position: 100% 50%;
+      }
+      100% {
+        background-position: 0% 50%;
+      }
+    }
+
+    .contact-form button:hover {
+      background: linear-gradient(135deg, #770800, #e70000);
+      background-size: 400% 400%;
+      animation: gradientButton 5s ease infinite;
+    }
+
+    .contact-info {
+      display: flex;
+      justify-content: space-around;
+      width: 100%;
+      margin-top: 100px;
+    }
+
+    .contact-info div {
+      text-align: center;
+      display: inline-flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      width: 100%; 
+    }
+
+    .contact-info i {
+      font-size: 40px;
+      margin-bottom: 10px;
+      color: #ffffff;
+    }
+
+    .contact-info p {
+      font-size: 16px;
+      color: #ddd;
+    }
+  </style>
+</head>
+<body>
+  <nav>
+    <div class="nav-container">
+      <div class="logo" data-aos="zoom-in" data-aos-duration="1500">
+        CjXa<span>nder</span>
+      </div>
+      <div class="links">
+        <div class="link" data-aos="fade-up" data-aos-duration="1500" data-aos-delay="100"><a href="index.html">Home</a></div>
+        <div class="link" data-aos="fade-up" data-aos-duration="1500" data-aos-delay="200"><a href="about.html">About</a></div>
+        <div class="link" data-aos="fade-up" data-aos-duration="1500" data-aos-delay="300"><a href="skills.html">Skills</a></div>
+        <div class="link" data-aos="fade-up" data-aos-duration="1500" data-aos-delay="400"><a href="services.html">Services</a></div>
+        <div class="link" data-aos="fade-up" data-aos-duration="1500" data-aos-delay="500"><a href="contact.html">Contact</a></div>
+      </div>
+      <i class="fa-solid fa-bars hamburg" onclick="hamburg()"></i>
+    </div>
+    <div class="dropdown">
+      <div class="links">
+        <a href="index.html">Home</a>
+        <a href="about.html">About</a>
+        <a href="skills.html">Skills</a>
+        <a href="services.html">Services</a>
+        <a href="contact.html">Contact</a>
+        <i class="fa-solid fa-xmark cancel" onclick="cancel()"></i>
+      </div>
+    </div>
+  </nav>
+
+  <section>
+    <div class="contact-container" data-aos="fade-up" data-aos-duration="1500">
+      <h1>Contact Me</h1>
+      <p>Feel free to reach out! I'm available for collaborations, inquiries, or any questions you might have.</p>
+      
+      <form class="contact-form" id="contact-form">
+        <input type="text" id="name" name="name" placeholder="Your Name" required>
+        <input type="email" id="email" name="email" placeholder="Your Email" required>
+        <textarea id="message" name="message" placeholder="Your Message" rows="5" required></textarea>
+        <button type="submit">Send Message</button>
+      </form>
+      
+      <div class="contact-info">
+        <div>
+            <i class="fa-brands fa-discord"></i>
+            <p>ibares</p>
+          </div>
+        
+        <div>
+          <i class="fa-solid fa-envelope"></i>
+          <p>CjXanderr@gmail.com</p>
+        </div>
+        <div>
+          <i class="fa-solid fa-location-dot"></i>
+          <p>Santiago Del Estero, Argentina</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+  <script>
+    // AOS
+    AOS.init({ offset: 0 });
+
+    document.getElementById('contact-form').addEventListener('submit', function(event) {
+      event.preventDefault(); 
+
+      var name = document.getElementById('name').value;
+      var email = document.getElementById('email').value;
+      var message = document.getElementById('message').value;
+
+      var emailLink = "https://mail.google.com/mail/?view=cm&fs=1&to=cjxanderr@gmail.com&su=Solicitud+de+Chamba+para+CjXander+-+" + encodeURIComponent(name) + "&body=" + encodeURIComponent(message) + "%0A%0AAtentamente%3A+" + encodeURIComponent(name) + "%0AEmail de Contacto%3A+" + encodeURIComponent(email);
+
+      window.open(emailLink, '_blank');
+    });
+  </script>
+  <script src="script.js"></script>
+</body>
+</html>
