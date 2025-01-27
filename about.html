@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -8,134 +9,18 @@
   <link rel="icon" href="pestaña.png" type="image/png">
   <title>Xander Web - About</title>
   <style>
-    body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-    }
-
-    .nav-container {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 10px 20px;
-      background-color: #333;
-      color: #fff;
-    }
-
-    .logo {
+    .question {
       font-size: 24px;
+      transition: transform 0.3s ease, color 0.3s ease;
+      cursor: pointer;
     }
 
-    .logo span {
+    .question:hover {
       color: #db3434;
     }
 
-    .links {
-      display: flex;
-      gap: 15px;
-    }
-
-    .link a {
-      color: #fff;
-      text-decoration: none;
-      font-size: 18px;
-    }
-
-    .hamburg {
-      display: none;
-      font-size: 24px;
-      cursor: pointer;
-    }
-
-    .dropdown {
-      display: none;
-      flex-direction: column;
-      background-color: #333;
-      position: absolute;
-      top: 60px;
-      width: 100%;
-      left: 0;
-      z-index: 1000;
-    }
-
-    .dropdown .links {
-      flex-direction: column;
-      gap: 10px;
-      padding: 10px 20px;
-    }
-
-    .dropdown .links a {
-      color: #fff;
-      text-decoration: none;
-      font-size: 18px;
-    }
-
-    .dropdown .cancel {
-      align-self: flex-end;
-      font-size: 24px;
-      cursor: pointer;
-    }
-
-    .main-container {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      padding: 20px;
-    }
-
-    .content {
-      text-align: center;
-      margin-bottom: 20px;
-    }
-
-    .content h1 {
-      font-size: 32px;
-    }
-
-    .content p {
-      font-size: 18px;
-      line-height: 1.6;
-    }
-
-    .image img {
-      max-width: 100%;
-      height: auto;
-    }
-
-    @media (max-width: 768px) {
-      .links {
-        display: none;
-      }
-
-      .hamburg {
-        display: block;
-      }
-
-      .dropdown {
-        display: flex;
-      }
-
-      .logo {
-        font-size: 20px;
-      }
-
-      .content h1 {
-        font-size: 28px;
-      }
-
-      .content p {
-        font-size: 16px;
-      }
-
-      .image img {
-        width: 90%;
-        height: auto;
-      }
-    }
-
-    /* Improve the visibility and touch accessibility of the navigation */
-    .hamburg, .dropdown .cancel {
-      color: #fff;
+    .question:active {
+      transform: scale(1.2);
     }
   </style>
 </head>
@@ -146,7 +31,7 @@
         CjXa<span>nder</span>
       </div>
       <div class="links">
-        <div class="link" data-aos="fade-up" data-aos-duration="1500" data-aos-delay="100"><a href="index.html">Home</a></div>
+        <div class="link" data-aos="fade-up" data-aos-duration="1500" data-aos-delay="100"><a href="home.html">Home</a></div>
         <div class="link" data-aos="fade-up" data-aos-duration="1500" data-aos-delay="200"><a href="about.html">About</a></div>
         <div class="link" data-aos="fade-up" data-aos-duration="1500" data-aos-delay="300"><a href="skills.html">Skills</a></div>
         <div class="link" data-aos="fade-up" data-aos-duration="1500" data-aos-delay="400"><a href="services.html">Services</a></div>
@@ -156,7 +41,7 @@
     </div>
     <div class="dropdown">
       <div class="links">
-        <a href="index.html">Home</a>
+        <a href="home.html">Home</a>
         <a href="about.html">About</a>
         <a href="skills.html">Skills</a>
         <a href="services.html">Services</a>
@@ -181,14 +66,6 @@
   <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
   <script>
     AOS.init({ offset: 0 });
-
-    function hamburg() {
-      document.querySelector('.dropdown').style.display = 'flex';
-    }
-
-    function cancel() {
-      document.querySelector('.dropdown').style.display = 'none';
-    }
   </script>
   <script src="script.js"></script>
 </body>
