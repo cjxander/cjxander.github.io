@@ -1,4 +1,3 @@
-<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -28,12 +27,13 @@
       animation: floatAnimation 3s ease-in-out infinite;
     }
 
+    /* Animación flotante */
     @keyframes floatAnimation {
       0% {
         transform: translateY(0);
       }
       50% {
-        transform: translateY(-10px); 
+        transform: translateY(-10px); /* Subir un poco */
       }
       100% {
         transform: translateY(0);
@@ -70,14 +70,92 @@
     .progress-bar {
       height: 10px;
       border-radius: 5px;
-      width: 0; 
-      transition: width 2s ease-out; 
+      width: 0; /* Start from 0% */
+      transition: width 2s ease-out; /* Animation for width transition */
     }
 
     .github-icon {
       font-size: 40px;
       color: #333;
       margin-bottom: 15px;
+    }
+
+    /* Mobile Styles */
+    @media (max-width: 768px) {
+      .skills-container {
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .skill-card {
+        width: 90%;
+        margin: 10px 0;
+      }
+
+      .nav-container {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 10px 20px;
+      }
+
+      .links {
+        display: none;
+      }
+
+      .dropdown {
+        display: none;
+        flex-direction: column;
+        align-items: center;
+        background-color: #fff;
+        position: absolute;
+        top: 60px;
+        width: 100%;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      }
+
+      .dropdown .links {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+      }
+
+      .dropdown .links a {
+        padding: 10px;
+        width: 100%;
+        text-align: center;
+        border-bottom: 1px solid #ddd;
+      }
+
+      .fa-bars {
+        display: block;
+      }
+
+      .fa-xmark {
+        display: none;
+      }
+
+      .dropdown.active {
+        display: flex;
+      }
+
+      .dropdown.active .fa-xmark {
+        display: block;
+      }
+
+      .dropdown.active .fa-bars {
+        display: none;
+      }
+    }
+
+    .main-container {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      text-align: center;
+      padding: 20px;
     }
   </style>
 </head>
@@ -88,7 +166,7 @@
         CjXa<span>nder</span>
       </div>
       <div class="links">
-        <div class="link" data-aos="fade-up" data-aos-duration="1500" data-aos-delay="100"><a href="index.html">Home</a></div>
+        <div class="link" data-aos="fade-up" data-aos-duration="1500" data-aos-delay="100"><a href="home.html">Home</a></div>
         <div class="link" data-aos="fade-up" data-aos-duration="1500" data-aos-delay="200"><a href="about.html">About</a></div>
         <div class="link" data-aos="fade-up" data-aos-duration="1500" data-aos-delay="300"><a href="skills.html">Skills</a></div>
         <div class="link" data-aos="fade-up" data-aos-duration="1500" data-aos-delay="400"><a href="services.html">Services</a></div>
@@ -98,7 +176,7 @@
     </div>
     <div class="dropdown">
       <div class="links">
-        <a href="index.html">Home</a>
+        <a href="home.html">Home</a>
         <a href="about.html">About</a>
         <a href="skills.html">Skills</a>
         <a href="services.html">Services</a>
@@ -108,11 +186,11 @@
     </div>
   </nav>
 
+  <!-- Contenido específico de la página Skills -->
   <section>
     <div class="main-container">
-    <div class="main-container" style="display: flex; justify-content: center; align-items: center; height: 100vh; text-align: center;">
       <div class="content" data-aos="fade-up" data-aos-duration="1500">
-        <h1 style="color: #c72a2a;">MY SKILLS </a></h1>
+        <h1 style="color: #c72a2a;">MY SKILLS</h1>
         <p>Here are some of the skills I have acquired over the years. These skills help me create amazing web experiences and projects.</p>
       </div>
 
@@ -185,9 +263,10 @@
 
   <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
   <script>
-    // AOS
+    // Inicializar AOS
     AOS.init({ offset: 0 });
 
+    // Función que animará las barras de progreso cuando la página se cargue
     window.addEventListener('load', () => {
       setTimeout(() => {
         document.getElementById('html-bar').style.width = '85%';
@@ -197,8 +276,16 @@
         document.getElementById('node-bar').style.width = '70%';
         document.getElementById('git-bar').style.width = '65%';
         document.getElementById('github-bar').style.width = '90%';
-      }, 100); 
+      }, 100); // Agregar un pequeño retraso para asegurar que la animación se ejecute
     });
+
+    function hamburg() {
+      document.querySelector('.dropdown').classList.toggle('active');
+    }
+
+    function cancel() {
+      document.querySelector('.dropdown').classList.remove('active');
+    }
   </script>
   <script src="script.js"></script>
 </body>
