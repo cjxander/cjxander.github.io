@@ -1,0 +1,319 @@
+<html lang="es">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>Muak Muak - Emergencia</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&amp;family=Roboto:wght@400;700&display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:wght@400;700&display=swap" rel="stylesheet"/>
+    <style>
+        body {
+            font-family: 'Libre Baskerville', serif;
+            opacity: 0;
+            transition: opacity 1.5s ease-in-out;
+        }
+        body.loaded {
+            opacity: 1;
+        }
+        h1, h2, h3 {
+            font-family: 'Great Vibes', cursive;
+        }
+        @keyframes gradientBackground {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        .animated-gradient {
+            background: linear-gradient(270deg, #5c5c5c, #666666, #707070, #5c5c5c, #666666, #707070, #5c5c5c, #666666, #707070, #5c5c5c, #666666, #707070, #0a0a0a, #000000, #0a0a0a, #000000, #000000, #000000, #0a0a0a, #000000, #0a0a0a, #000000, #000000, #0a0a0a, #000000, #000000, #0a0a0a, #000000, #ac6789, #bde0fe, #85b1da, #cdb4db, #ffafcc);
+            background-size: 1400% 1400%;
+            animation: gradientBackground 150s ease infinite;
+            opacity: 0;
+            transition: opacity 3s ease-in-out;
+        }
+        .animated-gradient.loaded {
+            opacity: 1;
+        }
+        .vintage-border-1, .vintage-border-2, .vintage-border-3 {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 1s ease-out, transform 1s ease-out;
+        }
+        .vintage-border-1.visible, .vintage-border-2.visible, .vintage-border-3.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .vintage-border-1 {
+            border: 2px solid #ffafcc;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            background-color: white;
+            margin-bottom: 20px;
+        }
+        .vintage-border-2 {
+            border: 2px dashed #ffc8dd;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            background-color: white;
+            margin-bottom: 20px;
+        }
+        .vintage-border-3 {
+            border: 2px double #bde0fe;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            background-color: white;
+            margin-bottom: 20px;
+        }
+        .quote {
+            font-family: 'Great Vibes', cursive;
+            font-size: 2rem;
+            color: #c2c2c2;
+            margin: 20px 0;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 1s ease-out, transform 1s ease-out;
+        }
+        .quote.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .rain {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 10;
+            display: none;
+        }
+        .rain.loaded {
+            display: block;
+        }
+        .raindrop {
+            position: absolute;
+            width: 2px;
+            height: 10px;
+            background: rgba(255, 255, 255, 0.5);
+            bottom: 100%;
+            animation: fall 1s infinite;
+        }
+        @keyframes fall {
+            to {
+                transform: translateY(100vh);
+            }
+        }
+        .splash {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background: rgba(255, 255, 255, 0.5);
+            border-radius: 50%;
+            opacity: 0;
+            pointer-events: none;
+            animation: splash 0.5s ease-out;
+        }
+        @keyframes splash {
+            0% {
+                transform: scale(0);
+                opacity: 1;
+            }
+            100% {
+                transform: scale(1.5);
+                opacity: 0;
+            }
+        }
+        .lightning {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.8);
+            opacity: 0;
+            pointer-events: none;
+            z-index: 20;
+        }
+        @keyframes flash {
+            0% {
+                opacity: 1;
+            }
+            100% {
+                opacity: 0;
+            }
+        }
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            justify-content: center;
+            align-items: center;
+            z-index: 30;
+            opacity: 0;
+            transition: opacity 0.5s ease-in-out;
+        }
+        .modal.visible {
+            display: flex;
+            opacity: 1;
+        }
+        .modal-content {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            max-width: 500px;
+            width: 90%;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            transform: scale(0.8);
+            transition: transform 0.5s ease-in-out;
+        }
+        .modal-content.visible {
+            transform: scale(1);
+        }
+        .modal-content h2 {
+            font-family: 'Great Vibes', cursive;
+            font-size: 2.5rem;
+            color: #6b7280;
+            margin-bottom: 20px;
+        }
+        .modal-content p {
+            font-family: 'Libre Baskerville', serif;
+            font-size: 1.25rem;
+            color: #6b7280;
+        }
+        .modal-content button {
+            margin-top: 20px;
+            background: #fa26b3;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: background 0.3s ease;
+        }
+        .modal-content button:hover {
+            background: #d11f96;
+        }
+    </style>
+</head>
+<body class="animated-gradient min-h-screen flex flex-col items-center justify-center p-4">
+    <header class="text-center mb-8">
+        <h1 class="text-5xl text-gray-800 mb-4">Muak Muak - Emergencia</h1>
+        <p class="text-3xl text-gray-700">Bienvenida a tu espacio de motivación y apoyo</p>
+    </header>
+    <main class="w-full max-w-4xl mx-auto text-center">
+        <article class="vintage-border-1 mb-8">
+            <h2 class="text-4xl text-gray-800 mb-4">Conoces la lluvia?</h2>
+            <p class="text-gray-600 mb-4">Dicen por ahí que la lluvia es producida por las nubes que no pueden guardar más sus pensamientos. Tal vez sea así, porque el amor, como la lluvia, a veces no se puede contener. Llueve para limpiar, para sanar, para recordarnos que todo pasa. Al igual que el amor, siempre encuentra su camino, incluso entre los momentos más oscuros. Y después de la tormenta, siempre llega la calma mi querida noelita 🌧️</p>
+            <img alt="Imagen decorativa de un paisaje vintage" class="w-full h-64 object-cover rounded-lg mb-4" height="400" src="https://i.pinimg.com/originals/e7/bc/99/e7bc99a9ae6df4586ce6a612ac0956de.gif" width="600"/>
+            <p class="text-gray-600">Tintin 12/02/25 - 04:50</p>
+        </article>
+        <article class="vintage-border-2 mb-8">
+            <h2 class="text-4xl text-gray-800 mb-4">Dias Nublados... Son hermosas, no?</h2>
+            <p class="text-gray-600 mb-4">Los días nublados... Dicen por ahí que la lluvia es producida por las nubes que no pueden guardar más sus pensamientos. Tal vez sea así, porque el amor, como la lluvia, a veces no se puede contener. Llueve para limpiar, para sanar, para recordarnos que todo pasa. Al igual que el amor, siempre encuentra su camino, incluso entre los momentos más oscuros. Y después de la tormenta, siempre llega la calma, Noelita, vos sos mi calma que llega después de la tormenta, la que me enseña que, incluso en los días más grises, hay espacio para la esperanza, pero yo tambien quiero serlo para vos, quiero encontrar la paz en medio de tu caos por esa mentesita que no puede controlarse bien, y cada día se vuelva una nueva oportunidad para seguir aprendiendo el uno del otro ☁️</p>
+            <img alt="Imagen decorativa de un paisaje vintage" class="w-full h-64 object-cover rounded-lg mb-4" height="400" src="https://i.pinimg.com/originals/ac/50/19/ac501913ebf72f75898e7d5c32e09c17.gif" width="600"/>
+            <p class="text-gray-600">Tintin 13/02/25 - 02:16</p>
+        </article>
+        <article class="vintage-border-3 mb-8">
+            <h2 class="text-4xl text-gray-800 mb-4">Flores de Noelita</h2>
+            <p class="text-gray-600 mb-4">son como un reflejo de su esencia, sabes? suaves, llenas de color y luz, como sus ojos! 
+                Las amarillas, tan brillantes y cálidas, representan esa alegría que tiene esa sonrisa hermosa, como un rayo de sol que ilumina hasta el día más gris,las rosas, suaves y delicadas, son como sus corazoncito, que se expresa en cada gesto tierno y en cada palabra llena de afecto, me hacen pensar en cómo, con solo su presencia, transforma lo cotidiano en algo lleno de alegria, las blancas, puras y tranquilas, son como la serenidad que ella aporta a la vida de tintin, una paz que se siente en cada abrazo fuerte que me da, en cada mirada, como si el tiempo se detuviera cuando estamos juntos, las rojas, intensas y llenas de vida, son la chispa que nunca se apaga, el amor apasionado que crece con cada día y más ese dia de san valentin, recordándome la energía con la que vivimos y la fuerza de nuestro amorcito, cada flor, con su color y su significado, es un pequeño reflejo de lo que siento por ella, un jardín de emociones que crece con el paso del tiempo, en un futuro te daré un jardin enorme en nuestra casita 🏠</p>
+            <img alt="Imagen decorativa de un paisaje vintage" class="w-full h-64 object-cover rounded-lg mb-4" height="400" src="https://i.pinimg.com/originals/91/07/67/91076763d51245294d208a33d562a30c.gif" width="600"/>
+            <p class="text-gray-600">Tintin 20/02/25 - 08:31</p>
+        </article>
+        <div class="quote">
+            "Eres mi sol en los días nublados, mi refugio en la tormenta y mi razón para sonreír cada día."
+        </div>
+        <div class="quote">
+            "Cada momento contigo es un tesoro que guardo en mi corazón."
+        </div>
+        <div class="mt-8">
+            <button id="tienda-btn" class="bg-pink-500 text-white px-6 py-3 rounded-full shadow-lg hover:bg-pink-600 transition duration-300">
+                <i class="fas fa-store mr-2"></i>
+                Tienda de Noelita
+            </button>
+        </div>
+    </main>
+    <div class="rain"></div>
+    <div class="lightning"></div>
+    <div class="modal" id="modal">
+        <div class="modal-content">
+            <h2>Próximamente</h2>
+            <p>Pero recuerda que también puedes con tu emprendimiento :)</p>
+            <button id="close-modal">Cerrar</button>
+        </div>
+    </div>
+    <script>
+        window.addEventListener('load', () => {
+            document.body.classList.add('loaded');
+            document.querySelector('.animated-gradient').classList.add('loaded');
+            setTimeout(() => {
+                const rainContainer = document.querySelector('.rain');
+                rainContainer.classList.add('loaded');
+                for (let i = 0; i < 100; i++) {
+                    const raindrop = document.createElement('div');
+                    raindrop.classList.add('raindrop');
+                    raindrop.style.left = `${Math.random() * 100}%`;
+                    raindrop.style.animationDuration = `${Math.random() * 0.5 + 0.5}s`;
+                    raindrop.addEventListener('animationend', () => {
+                        const splash = document.createElement('div');
+                        splash.classList.add('splash');
+                        splash.style.left = raindrop.style.left;
+                        splash.style.top = 'calc(100vh - 10px)';
+                        document.body.appendChild(splash);
+                        setTimeout(() => {
+                            splash.remove();
+                        }, 500);
+                    });
+                    rainContainer.appendChild(raindrop);
+                }
+            }, 10000);
+
+            setInterval(() => {
+                const lightning = document.querySelector('.lightning');
+                lightning.style.animation = 'flash 0.2s ease-out';
+                lightning.style.opacity = 1;
+                setTimeout(() => {
+                    lightning.style.opacity = 0;
+                }, 200);
+            }, 8000);
+        });
+
+        document.getElementById('tienda-btn').addEventListener('click', () => {
+            const modal = document.getElementById('modal');
+            modal.classList.add('visible');
+            setTimeout(() => {
+                document.querySelector('.modal-content').classList.add('visible');
+            }, 100);
+        });
+
+        document.getElementById('close-modal').addEventListener('click', () => {
+            const modalContent = document.querySelector('.modal-content');
+            modalContent.classList.remove('visible');
+            setTimeout(() => {
+                document.getElementById('modal').classList.remove('visible');
+            }, 500);
+        });
+
+        const observer = new IntersectionObserver(entries => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        });
+
+        document.querySelectorAll('.vintage-border-1, .vintage-border-2, .vintage-border-3, .quote').forEach(element => {
+            observer.observe(element);
+        });
+    </script>
+</body>
+</html>
