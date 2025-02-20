@@ -20,6 +20,7 @@
             height: 100vh;
             margin: 0;
             overflow: hidden;
+            flex-direction: column;
         }
         .neon-text {
             font-size: 2rem;
@@ -76,6 +77,27 @@
             0% { opacity: 0; }
             100% { opacity: 1; }
         }
+        .button {
+            display: none;
+            margin-top: 20px;
+            padding: 10px 20px;
+            font-size: 1rem;
+            color: #fff;
+            background-color: #ff00ff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            text-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 20px #ff00ff, 0 0 30px #ff00ff, 0 0 40px #ff00ff, 0 0 50px #ff00ff, 0 0 60px #ff00ff;
+            animation: flicker 1s infinite alternate;
+        }
+        .button.show {
+            display: inline-block;
+            animation: fadeInButton 1s ease-in-out;
+        }
+        @keyframes fadeInButton {
+            0% { opacity: 0; transform: scale(0.9); }
+            100% { opacity: 1; transform: scale(1); }
+        }
   </style>
  </head>
  <body>
@@ -89,10 +111,18 @@
    <p class="mt-2 text-md md:text-lg glow">
     O MANTENIMIENTO COMO LA MENTE DE TINTIN
    </p>
+   <button class="button" onclick="window.location.href='noelita.html'">
+    Volver a Casita
+   </button>
   </div>
   <div class="scanlines">
   </div>
   <div class="vhs-effect">
   </div>
+  <script>
+   setTimeout(() => {
+            document.querySelector('.button').classList.add('show');
+        }, 5000);
+  </script>
  </body>
 </html>
