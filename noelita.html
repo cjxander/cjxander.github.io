@@ -1,16 +1,19 @@
 <html lang="es">
-<head>
-    <meta charset="utf-8"/>
-    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-    <title>Muak Muak</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet"/>
-    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&amp;family=Roboto:wght@400;700&amp;display=swap" rel="stylesheet"/>
-    <style>
-        body {
+ <head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <title>
+   Muak Muak - Login
+  </title>
+  <script src="https://cdn.tailwindcss.com">
+  </script>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&amp;family=Roboto:wght@400;700&amp;display=swap" rel="stylesheet"/>
+  <style>
+   body {
             font-family: 'Roboto', sans-serif;
             opacity: 0;
-            transition: opacity 1.5s ease-in-out;
+            transition: opacity 1.5s ease-in-out, background 1.5s ease-in-out;
         }
         body.loaded {
             opacity: 1;
@@ -33,56 +36,225 @@
         .animated-gradient.loaded {
             opacity: 1;
         }
-        @keyframes sparkle {
-            0%, 100% { opacity: 0; transform: scale(0.5); }
-            50% { opacity: 1; transform: scale(1); }
+        .blurred-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            backdrop-filter: blur(10px);
+            z-index: -1;
         }
-        .sparkle {
+        .fade-in {
+            animation: fadeIn 2s ease-in-out;
+        }
+        @keyframes fadeIn {
+            0% { opacity: 0; }
+            100% { opacity: 1; }
+        }
+        .error-bg {
+            background: linear-gradient(270deg, #330000, #660000, #6e0b0b, #330000, #360000, #000000);
+            background-size: 1400% 1400%;
+            animation: gradientBackground 30s ease infinite;
+            transition: background 1.5s ease-in-out;
+        }
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            backdrop-filter: blur(10px);
+            justify-content: center;
+            align-items: center;
+            z-index: 10;
+        }
+        .modal-content {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            animation: fadeIn 1s ease-in-out;
+        }
+        .modal.show {
+            display: flex;
+        }
+        .fireworks {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 20;
+        }
+        .firework {
             position: absolute;
             width: 5px;
             height: 5px;
             background: white;
             border-radius: 50%;
-            animation: sparkle 1s infinite;
+            animation: explode 1s ease-out forwards;
         }
-        .sparkle:nth-child(1) { top: -10px; left: 20%; animation-delay: 0.2s; }
-        .sparkle:nth-child(2) { top: -10px; left: 80%; animation-delay: 0.4s; }
-        .sparkle:nth-child(3) { top: 50%; left: -10px; animation-delay: 0.6s; }
-        .sparkle:nth-child(4) { top: 50%; right: -10px; animation-delay: 0.8s; }
-        .sparkle:nth-child(5) { bottom: -10px; left: 20%; animation-delay: 1s; }
-        .sparkle:nth-child(6) { bottom: -10px; left: 80%; animation-delay: 1.2s; }
-    </style>
-</head>
-<body class="animated-gradient min-h-screen flex flex-col items-center justify-center p-4">
-    <header class="text-center mb-8">
-        <h1 class="text-5xl text-gray-800 mb-4">¿Modo Emergencia: Desmotivación?</h1>
-        <p class="text-3xl text-white">Respira, mi amor. No tienes que tener todas las respuestas hoy, ni cargar con todo sola. Pase lo que pase, estoy aquí para apoyarte, caminar a tu lado y recordarte que no estás sola 🤍</p>
-    </header>
-    <main class="w-full max-w-2xl mx-auto text-center">
-        <div class="relative flex flex-col md:flex-row justify-center items-center gap-4">
-            <a href="noelita2.html" class="relative bg-pink-500 text-white px-6 py-3 rounded-full shadow-lg hover:bg-pink-600 transition duration-300">
-                <i class="fas fa-heart mr-2"></i>
-                Tintin Emergencia
-            </a>
-            <div class="absolute inset-0 flex justify-center items-center pointer-events-none">
-                <div class="sparkle"></div>
-                <div class="sparkle"></div>
-                <div class="sparkle"></div>
-                <div class="sparkle"></div>
-                <div class="sparkle"></div>
-                <div class="sparkle"></div>
-            </div>
-            <a href="noelita3.html" class="bg-purple-500 text-white px-6 py-3 rounded-full shadow-lg hover:bg-purple-600 transition duration-300">
-                <i class="fas fa-star mr-2"></i>
-                Tintin Mega Emergencia
-            </a>
-        </div>
-    </main>
-    <script>
-        window.addEventListener('load', () => {
+        @keyframes explode {
+            0% { transform: scale(1); opacity: 1; }
+            100% { transform: scale(5); opacity: 0; }
+        }
+        .particle {
+            position: absolute;
+            width: 3px;
+            height: 3px;
+            background: white;
+            border-radius: 50%;
+            animation: particleMove 1s ease-out forwards;
+        }
+        @keyframes particleMove {
+            0% { transform: translate(0, 0); opacity: 1; }
+            100% { transform: translate(var(--x), var(--y)); opacity: 0; }
+        }
+        .welcome-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            backdrop-filter: blur(10px);
+            justify-content: center;
+            align-items: center;
+            z-index: 30;
+        }
+        .welcome-modal-content {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            animation: fadeIn 1s ease-in-out;
+        }
+        .welcome-modal.show {
+            display: flex;
+        }
+  </style>
+ </head>
+ <body class="animated-gradient min-h-screen flex items-center justify-center p-4 relative">
+  <div class="blurred-bg">
+  </div>
+  <div class="bg-white p-8 rounded-lg shadow-lg max-w-md w-full fade-in">
+   <h1 class="text-3xl text-center mb-6">
+    Iniciar Sesión
+   </h1>
+   <form id="loginForm" class="space-y-4">
+    <div>
+     <label class="block text-gray-700" for="username">
+      Usuario
+     </label>
+     <input class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-pink-500" id="username" name="username" type="text" value="noelita" readonly/>
+    </div>
+    <div>
+     <label class="block text-gray-700" for="password">
+      Contraseña
+     </label>
+     <input class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-pink-500" id="password" name="password" type="password" required/>
+    </div>
+    <button class="w-full bg-pink-500 text-white py-2 rounded-lg hover:bg-pink-600 transition duration-300" type="submit">
+     Iniciar Sesión
+    </button>
+    <p id="errorMessage" class="text-red-500 mt-4 hidden">
+     ¡Incorrecto! - Tienes 3 oportunidades antes que el código se elimine por Seguridad.
+    </p>
+   </form>
+  </div>
+  <div class="modal" id="modal">
+   <div class="modal-content">
+    <h2 class="text-2xl mb-4">
+     Acertijo
+    </h2>
+    <p class="text-gray-700 mb-4">
+     ¿Como le dice Noelita a Agustin?
+    </p>
+    <button class="bg-red-600 text-white py-2 px-4 rounded-lg hover:bg-red-700 transition duration-300" id="closeModal">
+     Piensa Noelita
+    </button>
+   </div>
+  </div>
+  <div class="fireworks" id="fireworks">
+  </div>
+  <div class="welcome-modal" id="welcomeModal">
+   <div class="welcome-modal-content">
+    <h2 class="text-2xl mb-4">
+        🩷 ¡Bienvenida, Noelita! 🩷
+    </h2>
+   </div>
+  </div>
+  <script>
+   window.addEventListener('load', () => {
             document.body.classList.add('loaded');
             document.querySelector('.animated-gradient').classList.add('loaded');
         });
-    </script>
-</body>
+
+        document.getElementById('loginForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            const password = document.getElementById('password').value;
+            if (password === 'tintin') {
+                if (document.body.classList.contains('error-bg')) {
+                    document.body.classList.remove('error-bg');
+                    document.body.classList.add('animated-gradient');
+                    setTimeout(() => {
+                        showFireworks();
+                        showWelcomeModal();
+                        setTimeout(() => {
+                            window.location.href = 'noelita4.html';
+                        }, 3000);
+                    }, 1500);
+                } else {
+                    showFireworks();
+                    showWelcomeModal();
+                    setTimeout(() => {
+                        window.location.href = 'noelita4.html';
+                    }, 3000);
+                }
+            } else {
+                document.getElementById('errorMessage').classList.remove('hidden');
+                document.body.classList.remove('animated-gradient');
+                document.body.classList.add('error-bg');
+                setTimeout(() => {
+                    document.getElementById('modal').classList.add('show');
+                }, 5000);
+            }
+        });
+
+        document.getElementById('closeModal').addEventListener('click', function() {
+            document.getElementById('modal').classList.remove('show');
+        });
+
+        function showFireworks() {
+            const fireworksContainer = document.getElementById('fireworks');
+            for (let i = 0; i < 10; i++) {
+                const firework = document.createElement('div');
+                firework.classList.add('firework');
+                firework.style.top = `${Math.random() * 100}%`;
+                firework.style.left = `${Math.random() * 100}%`;
+                fireworksContainer.appendChild(firework);
+
+                for (let j = 0; j < 20; j++) {
+                    const particle = document.createElement('div');
+                    particle.classList.add('particle');
+                    particle.style.setProperty('--x', `${Math.random() * 200 - 100}px`);
+                    particle.style.setProperty('--y', `${Math.random() * 200 - 100}px`);
+                    firework.appendChild(particle);
+                }
+
+                setTimeout(() => {
+                    firework.remove();
+                }, 1000);
+            }
+        }
+
+        function showWelcomeModal() {
+            const welcomeModal = document.getElementById('welcomeModal');
+            welcomeModal.classList.add('show');
+        }
+  </script>
+ </body>
 </html>
