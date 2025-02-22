@@ -1,4 +1,3 @@
-<!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="utf-8"/>
@@ -29,12 +28,6 @@
             background: linear-gradient(270deg, #ffafcc, #ffc8dd, #bde0fe, #a2d2ff, #cdb4db, #ffafcc);
             background-size: 1400% 1400%;
             animation: gradientBackground 60s ease infinite;
-        }
-        .error-bg {
-            background: linear-gradient(270deg, #330000, #660000, #6e0b0b, #330000, #360000, #000000);
-            background-size: 1400% 1400%;
-            animation: gradientBackground 30s ease infinite;
-            transition: background 1.5s ease-in-out;
         }
         .blurred-bg {
             position: absolute;
@@ -154,8 +147,6 @@
             event.preventDefault();
             const password = document.getElementById('password').value;
             if (password === 'tintin') {
-                document.body.classList.remove('error-bg');
-                document.body.classList.add('animated-gradient');
                 setTimeout(() => {
                     showFireworks();
                     showWelcomeModal();
@@ -165,7 +156,6 @@
                 }, 1500);
             } else {
                 document.getElementById('errorMessage').classList.remove('hidden');
-                document.body.classList.add('error-bg');
                 setTimeout(() => {
                     document.getElementById('modal').classList.add('show');
                 }, 5000);
