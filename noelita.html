@@ -15,34 +15,51 @@
             background: linear-gradient(270deg, #ffafcc, #ffc8dd, #bde0fe, #a2d2ff, #cdb4db, #ffafcc);
             background-size: 1400% 1400%;
             animation: gradientBackground 60s ease infinite;
+            -webkit-background: linear-gradient(270deg, #ffafcc, #ffc8dd, #bde0fe, #a2d2ff, #cdb4db, #ffafcc);
+            -webkit-background-size: 1400% 1400%;
+            -webkit-animation: gradientBackground 60s ease infinite;
+            background-attachment: fixed;
         }
+
         body.loaded {
             opacity: 1;
         }
+
         h1, h2, h3 {
             font-family: 'Great Vibes', cursive;
         }
+
         @keyframes gradientBackground {
             0% { background-position: 0% 50%; }
             50% { background-position: 100% 50%; }
             100% { background-position: 0% 50%; }
         }
+
+        @-webkit-keyframes gradientBackground {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
         .blurred-bg {
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            backdrop-filter: blur(10px);
             z-index: -1;
+            /* backdrop-filter: blur(10px);  */
         }
+
         .fade-in {
             animation: fadeIn 2s ease-in-out;
         }
+
         @keyframes fadeIn {
             0% { opacity: 0; }
             100% { opacity: 1; }
         }
+
         .modal {
             display: none;
             position: fixed;
@@ -55,6 +72,7 @@
             align-items: center;
             z-index: 10;
         }
+
         .modal-content {
             background: white;
             padding: 20px;
@@ -62,9 +80,11 @@
             text-align: center;
             animation: fadeIn 1s ease-in-out;
         }
+
         .modal.show {
             display: flex;
         }
+
         .fireworks {
             position: fixed;
             top: 0;
@@ -74,6 +94,7 @@
             pointer-events: none;
             z-index: 20;
         }
+
         .firework {
             position: absolute;
             width: 5px;
@@ -82,10 +103,12 @@
             border-radius: 50%;
             animation: explode 1s ease-out forwards;
         }
+
         @keyframes explode {
             0% { transform: scale(1); opacity: 1; }
             100% { transform: scale(5); opacity: 0; }
         }
+
         .welcome-modal {
             display: none;
             position: fixed;
@@ -98,6 +121,7 @@
             align-items: center;
             z-index: 30;
         }
+
         .welcome-modal.show {
             display: flex;
         }
