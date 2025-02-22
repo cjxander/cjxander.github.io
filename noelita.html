@@ -12,6 +12,9 @@
             font-family: 'Roboto', sans-serif;
             opacity: 0;
             transition: opacity 1.5s ease-in-out;
+            background: linear-gradient(270deg, #ffafcc, #ffc8dd, #bde0fe, #a2d2ff, #cdb4db, #ffafcc);
+            background-size: 1400% 1400%;
+            animation: gradientBackground 60s ease infinite;
         }
         body.loaded {
             opacity: 1;
@@ -23,11 +26,6 @@
             0% { background-position: 0% 50%; }
             50% { background-position: 100% 50%; }
             100% { background-position: 0% 50%; }
-        }
-        .animated-gradient {
-            background: linear-gradient(270deg, #ffafcc, #ffc8dd, #bde0fe, #a2d2ff, #cdb4db, #ffafcc);
-            background-size: 1400% 1400%;
-            animation: gradientBackground 60s ease infinite;
         }
         .blurred-bg {
             position: absolute;
@@ -105,7 +103,7 @@
         }
     </style>
 </head>
-<body class="animated-gradient min-h-screen flex items-center justify-center p-4 relative">
+<body class="min-h-screen flex items-center justify-center p-4 relative">
     <div class="blurred-bg"></div>
     <div class="bg-white p-8 rounded-lg shadow-lg max-w-md w-full fade-in">
         <h1 class="text-3xl text-center mb-6">Iniciar Sesión</h1>
