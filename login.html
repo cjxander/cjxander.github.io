@@ -1,0 +1,82 @@
+<html lang="en">
+ <head>
+  <meta charset="utf-8" />
+  <meta content="width=device-width, initial-scale=1" name="viewport" />
+  <title>MEF - Login</title>
+  <link rel="icon" href="/images/icon2.png" type="image/x-icon">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+   /* Animated gradient background for the body */
+   @keyframes gradientShift {
+    0% {
+     background-position: 0% 50%;
+    }
+    50% {
+     background-position: 100% 50%;
+    }
+    100% {
+     background-position: 0% 50%;
+    }
+   }
+   body {
+    background: linear-gradient(270deg, #b45309, #1e3a8a);
+    background-size: 400% 400%;
+    animation: gradientShift 15s ease infinite;
+   }
+   /* Fade-in animation for the form and logo */
+   @keyframes fadeInUp {
+    0% {
+     opacity: 0;
+     transform: translateY(20px);
+    }
+    100% {
+     opacity: 1;
+     transform: translateY(0);
+    }
+   }
+   form, img {
+    animation: fadeInUp 0.8s ease forwards;
+   }
+  </style>
+ </head>
+ <body class="min-h-screen flex flex-col items-center justify-center relative font-sans px-4">
+  <!-- Logo above the form -->
+  <img
+   alt="Logo image placeholder"
+   class="mb-8 w-40 h-auto"
+   src="/images/icon2.png"
+   width="160"
+   height="40"
+  />
+  <form
+   class="relative bg-[#292930] bg-opacity-90 rounded-lg p-10 w-full max-w-md shadow-lg backdrop-blur-sm"
+   style="box-shadow: 0 4px 6px rgb(0 0 0 / 0.3);"
+  >
+   <h2 class="text-white text-2xl font-semibold mb-6 relative z-10">Login Here</h2>
+   <label class="block text-white text-sm font-semibold mb-1" for="username"
+    >Username</label
+   >
+   <input
+    class="w-full mb-5 rounded-md bg-[#3a3a42] placeholder:text-[#6b6b75] text-white px-3 py-2 text-sm focus:outline-none"
+    id="username"
+    placeholder="Email or Phone"
+    type="text"
+   />
+   <label class="block text-white text-sm font-semibold mb-1" for="password"
+    >Password</label
+   >
+   <input
+    class="w-full mb-6 rounded-md bg-[#3a3a42] placeholder:text-[#6b6b75] text-white px-3 py-2 text-sm focus:outline-none"
+    id="password"
+    placeholder="Password"
+    type="password"
+   />
+   <button
+    class="w-full bg-white text-black font-bold py-3 rounded-md mb-6 hover:bg-gray-200 transition"
+    type="submit"
+   >
+    Log In
+   </button>
+  </form>
+ </body>
+</html>
