@@ -8,6 +8,14 @@
     <link rel="icon" href="pestaña.png" type="image/png">
     <title>Xander Web - Skills</title>
     <style>
+        /* Asegura que el html y el body ocupen el 100% de la altura y permitan el scroll vertical */
+        html, body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+            overflow-y: scroll; /* Permite el scroll vertical si el contenido excede la altura */
+        }
+
         /* Estilos generales para el contenedor de habilidades */
         .skills-container {
             display: flex;
@@ -162,12 +170,13 @@
         .main-container {
             display: flex;
             flex-direction: column;
-            justify-content: center;
+            /* Eliminado justify-content: center para permitir que el contenido fluya y el scroll funcione */
             align-items: center;
             min-height: 100vh; /* Usar min-height para que se adapte al contenido */
             text-align: center;
             padding: 20px;
             padding-top: 80px; /* Añadido para bajar el contenido */
+            box-sizing: border-box; /* Incluye padding en el cálculo de la altura */
         }
     </style>
 </head>
