@@ -1,292 +1,393 @@
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-  <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
-  <link rel="stylesheet" href="style.css">
-  <link rel="icon" href="pestaña.png" type="image/png">
-  <title>Xander Web - Skills</title>
-  <style>
-    .skills-container {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: space-around;
-      padding: 20px;
-    }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" href="pestaña.png" type="image/png">
+    <title>Xander Web - Skills</title>
+    <style>
+        /* Estilos generales para el contenedor de habilidades */
+        .skills-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+            padding: 20px;
+        }
 
-    .skill-card {
-      background-color: #f3f3f3;
-      border-radius: 10px;
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-      padding: 20px;
-      margin: 10px;
-      width: 250px;
-      text-align: center;
-      transition: transform 0.3s ease;
-      animation: floatAnimation 3s ease-in-out infinite;
-    }
+        /* Estilos para cada tarjeta de habilidad */
+        .skill-card {
+            background-color: #f3f3f3;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            margin: 10px;
+            width: 250px;
+            text-align: center;
+            transition: transform 0.3s ease;
+            animation: floatAnimation 3s ease-in-out infinite; /* Animación flotante */
+        }
 
-    /* Animación flotante */
-    @keyframes floatAnimation {
-      0% {
-        transform: translateY(0);
-      }
-      50% {
-        transform: translateY(-10px); /* Subir un poco */
-      }
-      100% {
-        transform: translateY(0);
-      }
-    }
+        /* Animación flotante para las tarjetas de habilidad */
+        @keyframes floatAnimation {
+            0% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-10px); /* Subir un poco */
+            }
+            100% {
+                transform: translateY(0);
+            }
+        }
 
-    .skill-card:hover {
-      transform: scale(1.05);
-    }
+        /* Efecto hover para las tarjetas de habilidad */
+        .skill-card:hover {
+            transform: scale(1.05);
+        }
 
-    .skill-card h3 {
-      margin-bottom: 10px;
-    }
+        /* Estilos para el título de la habilidad */
+        .skill-card h3 {
+            margin-bottom: 10px;
+        }
 
-    .skill-card p {
-      font-size: 16px;
-      color: #555;
-    }
+        /* Estilos para la descripción de la habilidad */
+        .skill-card p {
+            font-size: 16px;
+            color: #555;
+        }
 
-    .skill-card .icon {
-      font-size: 40px;
-      color: #db3434;
-      margin-bottom: 15px;
-    }
+        /* Estilos para los iconos de Font Awesome */
+        .skill-card .icon {
+            font-size: 40px;
+            color: #db3434; /* Color rojo para los iconos */
+            margin-bottom: 15px;
+        }
 
-    .progress-container {
-      width: 100%;
-      background-color: #ddd;
-      border-radius: 5px;
-      margin-top: 10px;
-      overflow: hidden;
-    }
+        /* Estilos específicos para el icono de GitHub */
+        .github-icon {
+            font-size: 40px;
+            color: #333; /* Color oscuro para el icono de GitHub */
+            margin-bottom: 15px;
+        }
 
-    .progress-bar {
-      height: 10px;
-      border-radius: 5px;
-      width: 0; /* Start from 0% */
-      transition: width 2s ease-out; /* Animation for width transition */
-    }
+        /* Contenedor de la barra de progreso */
+        .progress-container {
+            width: 100%;
+            background-color: #ddd;
+            border-radius: 5px;
+            margin-top: 10px;
+            overflow: hidden;
+        }
 
-    .github-icon {
-      font-size: 40px;
-      color: #333;
-      margin-bottom: 15px;
-    }
+        /* Barra de progreso */
+        .progress-bar {
+            height: 10px;
+            border-radius: 5px;
+            width: 0; /* Inicia en 0% para la animación */
+            transition: width 2s ease-out; /* Animación de la barra de progreso */
+        }
 
-    /* Mobile Styles */
-    @media (max-width: 768px) {
-      .skills-container {
-        flex-direction: column;
-        align-items: center;
-      }
+        /* Estilos para dispositivos móviles */
+        @media (max-width: 768px) {
+            .skills-container {
+                flex-direction: column;
+                align-items: center;
+            }
 
-      .skill-card {
-        width: 90%;
-        margin: 10px 0;
-      }
+            .skill-card {
+                width: 90%;
+                margin: 10px 0;
+            }
 
-      .nav-container {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        padding: 10px 20px;
-      }
+            .nav-container {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                padding: 10px 20px;
+            }
 
-      .links {
-        display: none;
-      }
+            .links {
+                display: none;
+            }
 
-      .dropdown {
-        display: none;
-        flex-direction: column;
-        align-items: center;
-        background-color: #fff;
-        position: absolute;
-        top: 60px;
-        width: 100%;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-      }
+            .dropdown {
+                display: none;
+                flex-direction: column;
+                align-items: center;
+                background-color: #fff;
+                position: absolute;
+                top: 60px;
+                width: 100%;
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            }
 
-      .dropdown .links {
-        display: flex;
-        flex-direction: column;
-        width: 100%;
-      }
+            .dropdown .links {
+                display: flex;
+                flex-direction: column;
+                width: 100%;
+            }
 
-      .dropdown .links a {
-        padding: 10px;
-        width: 100%;
-        text-align: center;
-        border-bottom: 1px solid #ddd;
-      }
+            .dropdown .links a {
+                padding: 10px;
+                width: 100%;
+                text-align: center;
+                border-bottom: 1px solid #ddd;
+            }
 
-      .fa-bars {
-        display: block;
-      }
+            /* Mostrar/ocultar iconos de hamburguesa/cierre */
+            .fa-bars {
+                display: block;
+            }
 
-      .fa-xmark {
-        display: none;
-      }
+            .fa-xmark {
+                display: none;
+            }
 
-      .dropdown.active {
-        display: flex;
-      }
+            .dropdown.active {
+                display: flex;
+            }
 
-      .dropdown.active .fa-xmark {
-        display: block;
-      }
+            .dropdown.active .fa-xmark {
+                display: block;
+            }
 
-      .dropdown.active .fa-bars {
-        display: none;
-      }
-    }
+            .dropdown.active .fa-bars {
+                display: none;
+            }
+        }
 
-    .main-container {
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-      text-align: center;
-      padding: 20px;
-    }
-  </style>
+        /* Contenedor principal para centrar el contenido y añadir espacio superior */
+        .main-container {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh; /* Usar min-height para que se adapte al contenido */
+            text-align: center;
+            padding: 20px;
+            padding-top: 80px; /* Añadido para bajar el contenido */
+        }
+    </style>
 </head>
 <body>
-  <nav>
-    <div class="nav-container">
-      <div class="logo" data-aos="zoom-in" data-aos-duration="1500">
-        CjXa<span>nder</span>
-      </div>
-      <div class="links">
-        <div class="link" data-aos="fade-up" data-aos-duration="1500" data-aos-delay="100"><a href="home.html">Home</a></div>
-        <div class="link" data-aos="fade-up" data-aos-duration="1500" data-aos-delay="200"><a href="about.html">About</a></div>
-        <div class="link" data-aos="fade-up" data-aos-duration="1500" data-aos-delay="300"><a href="skills.html">Skills</a></div>
-        <div class="link" data-aos="fade-up" data-aos-duration="1500" data-aos-delay="400"><a href="services.html">Services</a></div>
-        <div class="link" data-aos="fade-up" data-aos-duration="1500" data-aos-delay="500"><a href="contact.html">Contact</a></div>
-      </div>
-      <i class="fa-solid fa-bars hamburg" onclick="hamburg()"></i>
-    </div>
-    <div class="dropdown">
-      <div class="links">
-        <a href="home.html">Home</a>
-        <a href="about.html">About</a>
-        <a href="skills.html">Skills</a>
-        <a href="services.html">Services</a>
-        <a href="contact.html">Contact</a>
-        <i class="fa-solid fa-xmark cancel" onclick="cancel()"></i>
-      </div>
-    </div>
-  </nav>
-
-  <!-- Contenido específico de la página Skills -->
-  <section>
-    <div class="main-container">
-      <div class="content" data-aos="fade-up" data-aos-duration="1500">
-        <h1 style="color: #c72a2a;">MY SKILLS</h1>
-        <p>Here are some of the skills I have acquired over the years. These skills help me create amazing web experiences and projects.</p>
-      </div>
-
-      <div class="skills-container">
-        <div class="skill-card" data-aos="fade-up" data-aos-duration="1500">
-          <i class="fa-brands fa-html5 icon"></i>
-          <h3>HTML</h3>
-          <p>Expertise in creating structured and semantic web pages using HTML5 standards.</p>
-          <div class="progress-container">
-            <div class="progress-bar" id="html-bar" style="background-color: #4CAF50;"></div>
-          </div>
+    <nav>
+        <div class="nav-container">
+            <div class="logo" data-aos="zoom-in" data-aos-duration="1500">
+                CjXa<span>nder</span>
+            </div>
+            <div class="links">
+                <div class="link" data-aos="fade-up" data-aos-duration="1500" data-aos-delay="100"><a href="home.html">Home</a></div>
+                <div class="link" data-aos="fade-up" data-aos-duration="1500" data-aos-delay="200"><a href="about.html">About</a></div>
+                <div class="link" data-aos="fade-up" data-aos-duration="1500" data-aos-delay="300"><a href="skills.html">Skills</a></div>
+                <div class="link" data-aos="fade-up" data-aos-duration="1500" data-aos-delay="400"><a href="services.html">Services</a></div>
+                <div class="link" data-aos="fade-up" data-aos-duration="1500" data-aos-delay="500"><a href="contact.html">Contact</a></div>
+            </div>
+            <i class="fa-solid fa-bars hamburg" onclick="hamburg()"></i>
         </div>
-
-        <div class="skill-card" data-aos="fade-up" data-aos-duration="1500" data-aos-delay="100">
-          <i class="fa-brands fa-css3-alt icon"></i>
-          <h3>CSS</h3>
-          <p>Proficient in designing responsive layouts and animations with CSS3.</p>
-          <div class="progress-container">
-            <div class="progress-bar" id="css-bar" style="background-color: #FF9800;"></div>
-          </div>
+        <div class="dropdown">
+            <div class="links">
+                <a href="home.html">Home</a>
+                <a href="about.html">About</a>
+                <a href="skills.html">Skills</a>
+                <a href="services.html">Services</a>
+                <a href="contact.html">Contact</a>
+                <i class="fa-solid fa-xmark cancel" onclick="cancel()"></i>
+            </div>
         </div>
+    </nav>
 
-        <div class="skill-card" data-aos="fade-up" data-aos-duration="1500" data-aos-delay="200">
-          <i class="fa-brands fa-js icon"></i>
-          <h3>JavaScript</h3>
-          <p>Strong experience in JavaScript for building interactive web applications.</p>
-          <div class="progress-container">
-            <div class="progress-bar" id="js-bar" style="background-color: #F44336;"></div>
-          </div>
+    <!-- Contenido específico de la página Skills -->
+    <section>
+        <div class="main-container">
+            <div class="content" data-aos="fade-up" data-aos-duration="1500">
+                <h1 style="color: #c72a2a;">MY SKILLS</h1>
+                <p>Here are some of the skills I have acquired over the years. These skills help me create amazing web experiences and projects, and also provide comprehensive technical support.</p>
+            </div>
+
+            <div class="skills-container">
+                <!-- Habilidades de Desarrollo Web - Ordenadas según la solicitud (Git, Node.js, React) -->
+                <div class="skill-card" data-aos="fade-up" data-aos-duration="1500" data-aos-delay="0">
+                    <i class="fa-brands fa-git icon"></i>
+                    <h3>Git</h3>
+                    <p>Efficient use of Git for version control and collaboration on coding projects.</p>
+                    <div class="progress-container">
+                        <div class="progress-bar" id="git-bar" style="background-color: #9E9E9E;"></div>
+                    </div>
+                </div>
+
+                <div class="skill-card" data-aos="fade-up" data-aos-duration="1500" data-aos-delay="100">
+                    <i class="fa-brands fa-node icon"></i>
+                    <h3>Node.js</h3>
+                    <p>Building scalable server-side applications using Node.js and Express.</p>
+                    <div class="progress-container">
+                        <div class="progress-bar" id="node-bar" style="background-color: #8BC34A;"></div>
+                    </div>
+                </div>
+
+                <div class="skill-card" data-aos="fade-up" data-aos-duration="1500" data-aos-delay="200">
+                    <i class="fa-brands fa-react icon"></i>
+                    <h3>React</h3>
+                    <p>Experience in building dynamic and responsive user interfaces with React.</p>
+                    <div class="progress-container">
+                        <div class="progress-bar" id="react-bar" style="background-color: #00BCD4;"></div>
+                    </div>
+                </div>
+
+                <!-- Resto de Habilidades de Desarrollo Web -->
+                <div class="skill-card" data-aos="fade-up" data-aos-duration="1500" data-aos-delay="300">
+                    <i class="fa-brands fa-html5 icon"></i>
+                    <h3>HTML</h3>
+                    <p>Expertise in creating structured and semantic web pages using HTML5 standards.</p>
+                    <div class="progress-container">
+                        <div class="progress-bar" id="html-bar" style="background-color: #4CAF50;"></div>
+                    </div>
+                </div>
+
+                <div class="skill-card" data-aos="fade-up" data-aos-duration="1500" data-aos-delay="400">
+                    <i class="fa-brands fa-css3-alt icon"></i>
+                    <h3>CSS</h3>
+                    <p>Proficient in designing responsive layouts and animations with CSS3.</p>
+                    <div class="progress-container">
+                        <div class="progress-bar" id="css-bar" style="background-color: #FF9800;"></div>
+                    </div>
+                </div>
+
+                <div class="skill-card" data-aos="fade-up" data-aos-duration="1500" data-aos-delay="500">
+                    <i class="fa-brands fa-js icon"></i>
+                    <h3>JavaScript</h3>
+                    <p>Strong experience in JavaScript for building interactive web applications.</p>
+                    <div class="progress-container">
+                        <div class="progress-bar" id="js-bar" style="background-color: #F44336;"></div>
+                    </div>
+                </div>
+
+                <div class="skill-card" data-aos="fade-up" data-aos-duration="1500" data-aos-delay="600">
+                    <i class="fa-brands fa-github github-icon"></i>
+                    <h3>GitHub</h3>
+                    <p>Experience in hosting and collaborating on projects using GitHub.</p>
+                    <div class="progress-container">
+                        <div class="progress-bar" id="github-bar" style="background-color: #333;"></div>
+                    </div>
+                </div>
+
+                <!-- Habilidades Técnicas y de Reparación de PC -->
+                <div class="skill-card" data-aos="fade-up" data-aos-duration="1500" data-aos-delay="700">
+                    <i class="fa-solid fa-microchip icon"></i>
+                    <h3>Diagnóstico y Reparación de Hardware</h3>
+                    <p>Capacidad para identificar y solucionar problemas en componentes de PC.</p>
+                    <div class="progress-container">
+                        <div class="progress-bar" id="hardware-bar" style="background-color: #FF5722;"></div>
+                    </div>
+                </div>
+
+                <div class="skill-card" data-aos="fade-up" data-aos-duration="1500" data-aos-delay="800">
+                    <i class="fa-solid fa-desktop icon"></i>
+                    <h3>Instalación y Configuración de SO</h3>
+                    <p>Instalación, configuración y optimización de sistemas operativos (Windows, Linux).</p>
+                    <div class="progress-container">
+                        <div class="progress-bar" id="os-bar" style="background-color: #2196F3;"></div>
+                    </div>
+                </div>
+
+                <div class="skill-card" data-aos="fade-up" data-aos-duration="1500" data-aos-delay="900">
+                    <i class="fa-solid fa-shield-virus icon"></i>
+                    <h3>Eliminación de Virus y Malware</h3>
+                    <p>Especialista en la limpieza y protección de sistemas contra amenazas informáticas.</p>
+                    <div class="progress-container">
+                        <div class="progress-bar" id="virus-bar" style="background-color: #E91E63;"></div>
+                    </div>
+                </div>
+
+                <div class="skill-card" data-aos="fade-up" data-aos-duration="1500" data-aos-delay="1000">
+                    <i class="fa-solid fa-database icon"></i>
+                    <h3>Recuperación de Datos</h3>
+                    <p>Habilidad para recuperar información perdida o dañada de diversos dispositivos.</p>
+                    <div class="progress-container">
+                        <div class="progress-bar" id="data-bar" style="background-color: #673AB7;"></div>
+                    </div>
+                </div>
+
+                <div class="skill-card" data-aos="fade-up" data-aos-duration="1500" data-aos-delay="1100">
+                    <i class="fa-solid fa-tachometer-alt icon"></i>
+                    <h3>Optimización de Rendimiento</h3>
+                    <p>Mejora del rendimiento de equipos y sistemas para una operación más eficiente.</p>
+                    <div class="progress-container">
+                        <div class="progress-bar" id="performance-bar" style="background-color: #009688;"></div>
+                    </div>
+                </div>
+
+                <div class="skill-card" data-aos="fade-up" data-aos-duration="1500" data-aos-delay="1200">
+                    <i class="fa-solid fa-network-wired icon"></i>
+                    <h3>Redes y Conectividad</h3>
+                    <p>Configuración y resolución de problemas de red, Wi-Fi y conectividad.</p>
+                    <div class="progress-container">
+                        <div class="progress-bar" id="network-bar" style="background-color: #CDDC39;"></div>
+                    </div>
+                </div>
+
+                <div class="skill-card" data-aos="fade-up" data-aos-duration="1500" data-aos-delay="1300">
+                    <i class="fa-solid fa-screwdriver-wrench icon"></i>
+                    <h3>Ensamblaje de PCs</h3>
+                    <p>Experiencia en el montaje de computadoras personalizadas y actualización de componentes.</p>
+                    <div class="progress-container">
+                        <div class="progress-bar" id="assembly-bar" style="background-color: #FFC107;"></div>
+                    </div>
+                </div>
+
+                <div class="skill-card" data-aos="fade-up" data-aos-duration="1500" data-aos-delay="1400">
+                    <i class="fa-solid fa-headset icon"></i>
+                    <h3>Soporte Técnico Remoto</h3>
+                    <p>Provisión de asistencia técnica a distancia para solucionar problemas informáticos.</p>
+                    <div class="progress-container">
+                        <div class="progress-bar" id="remote-support-bar" style="background-color: #9C27B0;"></div>
+                    </div>
+                </div>
+
+            </div>
         </div>
+    </section>
 
-        <div class="skill-card" data-aos="fade-up" data-aos-duration="1500" data-aos-delay="300">
-          <i class="fa-brands fa-react icon"></i>
-          <h3>React</h3>
-          <p>Experience in building dynamic and responsive user interfaces with React.</p>
-          <div class="progress-container">
-            <div class="progress-bar" id="react-bar" style="background-color: #00BCD4;"></div>
-          </div>
-        </div>
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+    <script>
+        // Inicializar AOS (Animate On Scroll)
+        AOS.init({ offset: 0 });
 
-        <div class="skill-card" data-aos="fade-up" data-aos-duration="1500" data-aos-delay="400">
-          <i class="fa-brands fa-node icon"></i>
-          <h3>Node.js</h3>
-          <p>Building scalable server-side applications using Node.js and Express.</p>
-          <div class="progress-container">
-            <div class="progress-bar" id="node-bar" style="background-color: #8BC34A;"></div>
-          </div>
-        </div>
+        // Función que animará las barras de progreso cuando la página se cargue
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                // Habilidades de desarrollo web (ordenadas según la solicitud)
+                document.getElementById('git-bar').style.width = '65%';
+                document.getElementById('node-bar').style.width = '70%';
+                document.getElementById('react-bar').style.width = '70%';
+                document.getElementById('html-bar').style.width = '85%';
+                document.getElementById('css-bar').style.width = '75%';
+                document.getElementById('js-bar').style.width = '80%';
+                document.getElementById('github-bar').style.width = '90%';
 
-        <div class="skill-card" data-aos="fade-up" data-aos-duration="1500" data-aos-delay="500">
-          <i class="fa-brands fa-git icon"></i>
-          <h3>Git</h3>
-          <p>Efficient use of Git for version control and collaboration on coding projects.</p>
-          <div class="progress-container">
-            <div class="progress-bar" id="git-bar" style="background-color: #9E9E9E;"></div>
-          </div>
-        </div>
+                // Habilidades técnicas y de reparación de PC
+                document.getElementById('hardware-bar').style.width = '88%';
+                document.getElementById('os-bar').style.width = '82%';
+                document.getElementById('virus-bar').style.width = '90%';
+                document.getElementById('data-bar').style.width = '78%';
+                document.getElementById('performance-bar').style.width = '85%';
+                document.getElementById('network-bar').style.width = '75%';
+                document.getElementById('assembly-bar').style.width = '80%';
+                document.getElementById('remote-support-bar').style.width = '92%';
+            }, 100); // Pequeño retraso para asegurar que la animación se ejecute
+        });
 
-        <div class="skill-card" data-aos="fade-up" data-aos-duration="1500" data-aos-delay="600">
-          <i class="fa-brands fa-github github-icon"></i>
-          <h3>GitHub</h3>
-          <p>Experience in hosting and collaborating on projects using GitHub.</p>
-          <div class="progress-container">
-            <div class="progress-bar" id="github-bar" style="background-color: #333;"></div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
+        // Funciones para el menú de hamburguesa en dispositivos móviles
+        function hamburg() {
+            document.querySelector('.dropdown').classList.toggle('active');
+        }
 
-  <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
-  <script>
-    // Inicializar AOS
-    AOS.init({ offset: 0 });
-
-    // Función que animará las barras de progreso cuando la página se cargue
-    window.addEventListener('load', () => {
-      setTimeout(() => {
-        document.getElementById('html-bar').style.width = '85%';
-        document.getElementById('css-bar').style.width = '75%';
-        document.getElementById('js-bar').style.width = '80%';
-        document.getElementById('react-bar').style.width = '70%';
-        document.getElementById('node-bar').style.width = '70%';
-        document.getElementById('git-bar').style.width = '65%';
-        document.getElementById('github-bar').style.width = '90%';
-      }, 100); // Agregar un pequeño retraso para asegurar que la animación se ejecute
-    });
-
-    function hamburg() {
-      document.querySelector('.dropdown').classList.toggle('active');
-    }
-
-    function cancel() {
-      document.querySelector('.dropdown').classList.remove('active');
-    }
-  </script>
-  <script src="script.js"></script>
+        function cancel() {
+            document.querySelector('.dropdown').classList.remove('active');
+        }
+    </script>
+    <!-- Se asume que 'script.js' contiene lógica adicional si es necesario -->
+    <script src="script.js"></script>
 </body>
 </html>
