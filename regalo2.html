@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Juego de Corazones</title>
+    <style>
+        /* Estilos generales */
+        body {
+            margin: 0;
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #a8c0ff, #f3a5a5);
+            color: #fff;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            min-height: 100vh;
+            overflow: hidden;
+            position: relative;
+        }
+
+        h1 {
+            margin-top: 2rem;
+            text-align: center;
+            font-size: 1.5rem;
+            font-weight: bold;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        .corazon {
+            position: absolute;
+            width: 80px;
+            height: 80px;
+            background-color: #ff5c8a;
+            border-radius: 50%;
+            box-shadow: 0 4px 15px rgba(255, 92, 138, 0.4);
+            cursor: pointer;
+            transition: transform 0.3s ease-in-out, opacity 0.5s ease-in-out;
+            animation: pulse 2s infinite ease-in-out, chaoticMove 5s infinite ease-in-out;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5rem;
+            z-index: 10;
+        }
+
+        .corazon:hover {
+            transform: scale(1.1);
+        }
+
+        .mensaje {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 1.25rem;
+            text-align: center;
+            max-width: 80%;
+            opacity: 0;
+            transition: opacity 0.5s ease-in-out;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
+            z-index: 20;
+        }
+
+        .cloud {
+            position: absolute;
+            font-size: 3rem;
+            animation: float 20s linear infinite;
+            opacity: 0.8;
+            z-index: 5;
+        }
+
+        @keyframes float {
+            0% { transform: translateX(0) translateY(0); }
+            50% { transform: translateX(50px) translateY(-10px); }
+            100% { transform: translateX(0) translateY(0); }
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+
+        @keyframes chaoticMove {
+            0% { transform: translate(0, 0) rotate(0deg); }
+            25% { transform: translate(15px, 5px) rotate(5deg); }
+            50% { transform: translate(-10px, -15px) rotate(-10deg); }
+            75% { transform: translate(5px, 10px) rotate(2deg); }
+            100% { transform: translate(0, 0) rotate(0deg); }
+        }
+
+        .counter {
+            position: fixed;
+            bottom: 1rem;
+            right: 1rem;
+            background-color: rgba(255, 255, 255, 0.8);
+            color: #ff5c8a;
+            padding: 0.5rem 1rem;
+            border-radius: 1rem;
+            font-weight: bold;
+            z-index: 30;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Título principal -->
+    <h1>Haz clic en los corazones para descubrir mensajes</h1>
+
+    <!-- Contenedores de elementos del juego -->
+    <div id="corazonesContainer"></div>
+    <div id="mensaje" class="mensaje"></div>
+
+    <!-- Nubes con emojis en el fondo -->
+    <div class="cloud" style="top: 10%; left: 5%; animation-delay: 1s;">☁️</div>
+    <div class="cloud" style="top: 20%; right: 15%; animation-delay: 5s;">☁️</div>
+    <div class="cloud" style="top: 40%; left: 20%; animation-delay: 3s;">☁️</div>
+    <div class="cloud" style="top: 30%; right: 30%; animation-delay: 8s;">☁️</div>
+
+    <!-- Contador de corazones rotos -->
+    <div id="counter" class="counter">Corazones: 0 / 30</div>
+
+    <script>
+        // Mensajes románticos
+        const mensajes = [
+            "Eres mi persona favorita ❤️",
+            "Cada día con vos es un regalo 🎁",
+            "Tu sonrisa ilumina mi mundo ✨",
+            "Gracias por hacerme feliz siempre 😊",
+            "Sos la mejor parte de mi vida 🥰",
+            "Con vos todo es mejor 💖",
+            "Te amo hasta el infinito ♾️",
+            "Sos mi alegría diaria 🎉",
+            "No hay lugar mejor que a tu lado 🥰",
+            "Vos y yo, juntos, lo podemos todo",
+            "Gracias por ser mi paz y mi aventura",
+            "Cada momento a tu lado es un sueño hecho realidad",
+            "Tu voz es mi canción favorita",
+            "Sos mi estrella en la oscuridad",
+            "Mi hogar es donde vos estás",
+            "Con vos, el tiempo vuela y el corazón se llena",
+            "Sos mi deseo más grande",
+            "Tu amor es mi mayor tesoro",
+            "Me hacés mejor persona, simplemente por ser vos",
+            "Vos sos la magia en mi vida",
+            "Sos el 'para siempre' en mi corazón",
+            "Mi corazón te pertenece",
+            "Sos mi sol, mi luna y todas mis estrellas",
+            "Con vos, la vida es una obra de arte",
+            "Sos el 'sí' a todas mis preguntas",
+            "Tu amor es mi mayor inspiración",
+            "La vida con vos es un cuento de hadas",
+            "Cada latido de mi corazón te llama",
+            "Vos sos mi destino",
+            "Simplemente, vos sos todo para mí"
+        ];
+
+        const container = document.getElementById('corazonesContainer');
+        const mensajeDiv = document.getElementById('mensaje');
+        const counterDiv = document.getElementById('counter');
+        let heartsDestroyed = 0;
+        const totalHearts = 30;
+        const heartsOnScreen = 8; 
+
+        function createHeart() {
+            const heart = document.createElement('div');
+            heart.classList.add('corazon');
+
+            const positionX = Math.random() * (window.innerWidth - 80);
+            const positionY = Math.random() * (window.innerHeight - 80);
+
+            heart.style.left = `${positionX}px`;
+            heart.style.top = `${positionY}px`;
+            heart.innerText = '💖';
+
+            const randomMessageIndex = Math.floor(Math.random() * mensajes.length);
+            const message = mensajes[randomMessageIndex];
+            heart.dataset.message = message;
+
+            container.appendChild(heart);
+            
+
+            heart.addEventListener('click', () => {
+                mensajeDiv.innerText = heart.dataset.message;
+                mensajeDiv.style.opacity = "1";
+                heart.style.transform = "scale(0)";
+                heart.style.opacity = "0";
+                
+                heartsDestroyed++;
+                counterDiv.innerText = `Corazones: ${heartsDestroyed} / ${totalHearts}`;
+                
+                setTimeout(() => {
+                    heart.remove();
+                    if (heartsDestroyed < totalHearts) {
+                        createHeart();
+                    } else {
+                        mensajeDiv.innerText = "¡Felicidades, has desbloqueado la siguiente sorpresa!";
+                        setTimeout(() => {
+                            window.location.href = "regalo3.html";
+                        }, 2000); 
+                    }
+                }, 500);
+            });
+        }
+
+        for (let i = 0; i < heartsOnScreen; i++) {
+            createHeart();
+        }
+    </script>
+
+</body>
+</html>
