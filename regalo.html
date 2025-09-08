@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Feliz Cumpleaños, mi amor</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Pacifico&display=swap');
+        
+        body {
+            font-family: 'Pacifico', cursive;
+            overflow: hidden; /* Oculta el scroll inicialmente */
+        }
+        
+        /* Animación del fondo degradado pastel */
+        .animated-gradient {
+            background: linear-gradient(-45deg, #fecaca, #e3b8e7, #d9a7c7, #a8d9d9);
+            background-size: 400% 400%;
+            animation: gradient-animation 15s ease infinite;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+        }
+
+        @keyframes gradient-animation {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* Animación de máquina de escribir lenta */
+        .typewriter-text {
+            overflow: hidden;
+            white-space: nowrap;
+            border-right: 0.15em solid white; /* Cursor parpadeante */
+            animation: 
+                typing 5s steps(40, end),
+                blink-caret .75s step-end infinite;
+            width: 0;
+        }
+
+        /* Para que el texto se escriba */
+        @keyframes typing {
+            from { width: 0 }
+            to { width: 100% }
+        }
+
+        /* Para que el cursor parpadee */
+        @keyframes blink-caret {
+            from, to { border-color: transparent }
+            50% { border-color: white }
+        }
+
+        /* Video */
+        #video-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            opacity: 0; /* Inicialmente oculto */
+            transition: opacity 2s ease-in-out; /* Transición suave de fade in */
+        }
+    </style>
+</head>
+<body class="flex flex-col items-center justify-center min-h-screen text-white">
+
+    <div class="animated-gradient"></div>
+
+    <div class="absolute inset-0 flex flex-col items-center justify-center z-10">
+        <h1 id="typewriter-h1" class="text-4xl md:text-6xl font-bold typewriter-text">Feliz Cumple, mi amor 💕</h1>
+    </div>
+
+    <div id="video-container" class="z-20">
+        <video id="music-video" class="w-full h-full object-cover" controls autoplay>
+            <!-- Nota: Debes reemplazar 'musica.mp4' con la ruta de tu video -->
+            <source src="musica.mp4" type="video/mp4">
+            Tu navegador no soporta el tag de video.
+        </video>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const typewriterH1 = document.getElementById('typewriter-h1');
+            const videoContainer = document.getElementById('video-container');
+            const musicVideo = document.getElementById('music-video');
+
+            // Escuchar el evento cuando la animación de "typing" termine
+            typewriterH1.addEventListener('animationend', (event) => {
+                if (event.animationName === 'typing') {
+                    // Quitar el borde (el cursor parpadeante) y la animación de parpadeo
+                    typewriterH1.style.borderRight = 'none';
+                    typewriterH1.style.animation = 'none';
+                }
+            });
+
+            // Después de 3 segundos, el video aparece
+            setTimeout(() => {
+                videoContainer.style.opacity = 1;
+            }, 3000);
+
+            // Cuando el video termina, redirigir a la siguiente página
+            musicVideo.addEventListener('ended', () => {
+                window.location.href = 'fotos.html';
+            });
+        });
+    </script>
+
+</body>
+</html>
