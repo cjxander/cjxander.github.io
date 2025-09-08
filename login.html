@@ -1,82 +1,353 @@
-<html lang="en">
- <head>
-  <meta charset="utf-8" />
-  <meta content="width=device-width, initial-scale=1" name="viewport" />
-  <title>MEF - Login</title>
-  <link rel="icon" href="/images/icon2.png" type="image/x-icon">
-  <script src="https://cdn.tailwindcss.com"></script>
-  <style>
-   /* Animated gradient background for the body */
-   @keyframes gradientShift {
-    0% {
-     background-position: 0% 50%;
-    }
-    50% {
-     background-position: 100% 50%;
-    }
-    100% {
-     background-position: 0% 50%;
-    }
-   }
-   body {
-    background: linear-gradient(270deg, #b45309, #1e3a8a);
-    background-size: 400% 400%;
-    animation: gradientShift 15s ease infinite;
-   }
-   /* Fade-in animation for the form and logo */
-   @keyframes fadeInUp {
-    0% {
-     opacity: 0;
-     transform: translateY(20px);
-    }
-    100% {
-     opacity: 1;
-     transform: translateY(0);
-    }
-   }
-   form, img {
-    animation: fadeInUp 0.8s ease forwards;
-   }
-  </style>
- </head>
- <body class="min-h-screen flex flex-col items-center justify-center relative font-sans px-4">
-  <!-- Logo above the form -->
-  <img
-   alt="Logo image placeholder"
-   class="mb-8 w-40 h-auto"
-   src="/images/icon2.png"
-   width="160"
-   height="40"
-  />
-  <form
-   class="relative bg-[#292930] bg-opacity-90 rounded-lg p-10 w-full max-w-md shadow-lg backdrop-blur-sm"
-   style="box-shadow: 0 4px 6px rgb(0 0 0 / 0.3);"
-  >
-   <h2 class="text-white text-2xl font-semibold mb-6 relative z-10">Login Here</h2>
-   <label class="block text-white text-sm font-semibold mb-1" for="username"
-    >Username</label
-   >
-   <input
-    class="w-full mb-5 rounded-md bg-[#3a3a42] placeholder:text-[#6b6b75] text-white px-3 py-2 text-sm focus:outline-none"
-    id="username"
-    placeholder="Email or Phone"
-    type="text"
-   />
-   <label class="block text-white text-sm font-semibold mb-1" for="password"
-    >Password</label
-   >
-   <input
-    class="w-full mb-6 rounded-md bg-[#3a3a42] placeholder:text-[#6b6b75] text-white px-3 py-2 text-sm focus:outline-none"
-    id="password"
-    placeholder="Password"
-    type="password"
-   />
-   <button
-    class="w-full bg-white text-black font-bold py-3 rounded-md mb-6 hover:bg-gray-200 transition"
-    type="submit"
-   >
-    Log In
-   </button>
-  </form>
- </body>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>???</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Pacifico&family=Inter:wght@400;700&display=swap');
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #fce4ec;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            overflow: hidden;
+            transition: background-color 0.5s ease-in-out;
+        }
+
+        /* Animación de temblor */
+        @keyframes shake {
+            0% { transform: translateX(0); }
+            25% { transform: translateX(-5px); }
+            50% { transform: translateX(5px); }
+            75% { transform: translateX(-5px); }
+            100% { transform: translateX(0); }
+        }
+
+        .shake-active {
+            animation: shake 0.5s;
+        }
+
+        /* Estilo del contenedor del login */
+        .login-card {
+            background: white;
+            padding: 2.5rem;
+            border-radius: 2rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            max-width: 90%;
+            width: 400px;
+            animation: fadeIn 1s ease-in-out forwards;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .profile-picture {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            margin: 0 auto 1.5rem auto;
+            overflow: hidden;
+        }
+
+        .profile-picture img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /* Estilo de los campos de formulario */
+        .input-group {
+            position: relative;
+            margin-bottom: 1rem;
+        }
+
+        .input-group label {
+            position: absolute;
+            left: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #9ca3af;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+        
+        .input-field {
+            width: 100%;
+            padding: 0.75rem 1rem 0.75rem 6.5rem;
+            border: 2px solid #e5e7eb;
+            border-radius: 9999px;
+            background-color: white;
+            transition: all 0.3s ease-in-out;
+        }
+        
+        .input-field:focus {
+            outline: none;
+            border-color: #fecaca;
+            box-shadow: 0 0 0 3px rgba(254, 202, 202, 0.5);
+        }
+
+        /* Botón de flecha */
+        .login-button {
+            width: 100%;
+            padding: 0.75rem;
+            background-color: #FF69B4;
+            color: white;
+            font-weight: bold;
+            border-radius: 9999px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: transform 0.3s ease-in-out, background-color 0.3s ease-in-out;
+            cursor: pointer;
+        }
+
+        .login-button:hover {
+            transform: scale(1.05);
+            background-color: #f472b6;
+        }
+
+        /* Estilo del modal de pista */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 100;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0,0,0,0.4);
+            backdrop-filter: blur(5px);
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal-content {
+            background-color: white;
+            padding: 20px;
+            border-radius: 1rem;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            text-align: center;
+            position: relative;
+            max-width: 80%;
+            animation: popIn 0.5s ease-out;
+        }
+        
+        @keyframes popIn {
+            from { transform: scale(0.8); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
+        }
+
+        .modal-title {
+            font-family: 'Pacifico', cursive;
+            font-size: 1.5rem;
+            color: #FF69B4;
+            margin-bottom: 0.5rem;
+        }
+
+        .modal-message {
+            font-family: 'Inter', sans-serif;
+            font-size: 1rem;
+            color: #4b5563;
+        }
+
+        .modal-button {
+            background-color: #FF69B4;
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 9999px;
+            margin-top: 1rem;
+            cursor: pointer;
+        }
+
+        /* Estilo del contenedor de bloqueo */
+        .locked-container {
+            text-align: center;
+            padding: 2rem;
+            animation: fadeIn 1s ease-in-out forwards;
+        }
+
+        .padlock-icon {
+            font-size: 4rem;
+            color: #FF69B4;
+            margin-bottom: 1rem;
+        }
+
+        .romantic-message {
+            font-family: 'Pacifico', cursive;
+            font-size: 2rem;
+            color: #FF69B4;
+            margin-bottom: 1rem;
+        }
+
+        .countdown-text {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #4b5563;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Contenedor del estado bloqueado -->
+    <div id="locked-state" class="locked-container">
+        <span class="padlock-icon">&#128274;</span> <!-- Icono de candado -->
+        <h1 class="romantic-message">¡Aún no es la hora, mi amor!</h1>
+        <p class="countdown-text">Faltan <span id="countdown"></span></p>
+    </div>
+
+    <!-- Contenedor del login -->
+    <div id="login-state" class="hidden">
+        <div class="login-card">
+            <div class="profile-picture">
+                <img src="https://placehold.co/120x120/FFC0CB/FFFFFF?text=Hello+Kitty" alt="Hello Kitty">
+            </div>
+            <form id="login-form">
+                <div class="input-group">
+                    <label for="username">Usuario</label>
+                    <input type="text" id="username" value="NoelitaHermosaCumple20" class="input-field" readonly>
+                </div>
+                <div class="input-group">
+                    <label for="password">Contraseña</label>
+                    <input type="password" id="password" class="input-field">
+                </div>
+                <button type="submit" class="login-button">
+                    Entrar
+                </button>
+            </form>
+        </div>
+    </div>
+    
+    <!-- Modal de pista -->
+    <div id="hint-modal" class="modal">
+        <div class="modal-content">
+            <h2 class="modal-title">Pista:</h2>
+            <p class="modal-message">
+                Es el apodo de Agustín que le puso la Noelita, pero con su edad, todo junto.
+            </p>
+            <button id="close-modal" class="modal-button">Aceptar</button>
+        </div>
+    </div>
+
+    <!-- Modal de error con botón de pista -->
+    <div id="error-modal" class="modal">
+        <div class="modal-content">
+            <h2 class="modal-title">¡Contraseña incorrecta!</h2>
+            <p class="modal-message">
+                Inténtalo de nuevo.
+            </p>
+            <button id="show-hint-button" class="modal-button">Ver Pista</button>
+        </div>
+    </div>
+    
+    <!-- Modal de carga -->
+    <div id="loading-modal" class="modal">
+        <div class="modal-content">
+            <h2 class="modal-title">¡Contraseña correcta!</h2>
+            <p class="modal-message">
+                Cargando...
+            </p>
+            <!-- Puedes añadir un spinner de carga aquí -->
+            <div class="mt-4">
+                <svg class="animate-spin h-8 w-8 text-pink-500 mx-auto" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                    <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                    <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                </svg>
+            </div>
+            <p class="modal-message mt-2">Bienvenida, Noelita cumpleañera.</p>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const lockedState = document.getElementById('locked-state');
+            const loginState = document.getElementById('login-state');
+            const countdownEl = document.getElementById('countdown');
+            const targetHour = 3;
+            const targetMinute = 25;
+
+            function updateCountdown() {
+                const now = new Date();
+                const targetTime = new Date(now.getFullYear(), now.getMonth(), now.getDate(), targetHour, targetMinute, 0);
+
+                // Si ya pasaron las 3:00 am, se muestra el formulario
+                if (now.getTime() >= targetTime.getTime()) {
+                    lockedState.style.display = 'none';
+                    loginState.style.display = 'flex';
+                    clearInterval(countdownInterval);
+                    return;
+                }
+
+                const remaining = targetTime.getTime() - now.getTime();
+                const minutes = Math.floor((remaining % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((remaining % (1000 * 60)) / 1000);
+
+                countdownEl.textContent = `${minutes} minutos y ${seconds} segundos`;
+            }
+
+            const countdownInterval = setInterval(updateCountdown, 1000);
+            updateCountdown(); // Llamada inicial para evitar un segundo de espera
+
+            // Lógica de validación del formulario
+            document.getElementById('login-form').addEventListener('submit', function(event) {
+                event.preventDefault();
+
+                const password = document.getElementById('password').value;
+                const correctPassword = "Tintin21";
+
+                if (password === correctPassword) {
+                    const loadingModal = document.getElementById('loading-modal');
+                    loadingModal.style.display = 'flex';
+                    
+                    setTimeout(() => {
+                        window.location.href = "regalo.html";
+                    }, 3000); // 3 segundos de duración
+                } else {
+                    document.body.classList.add('shake-active');
+                    document.body.style.backgroundColor = '#fecaca'; // Fondo rojo
+                    setTimeout(() => {
+                        document.body.classList.remove('shake-active');
+                        document.body.style.backgroundColor = '#fce4ec'; // Vuelve al color original
+                    }, 500);
+
+                    const errorModal = document.getElementById('error-modal');
+                    errorModal.style.display = "flex";
+                }
+            });
+
+            document.getElementById('show-hint-button').addEventListener('click', () => {
+                const errorModal = document.getElementById('error-modal');
+                const hintModal = document.getElementById('hint-modal');
+                errorModal.style.display = 'none';
+                hintModal.style.display = 'flex';
+            });
+
+            document.getElementById('close-modal').addEventListener('click', () => {
+                const hintModal = document.getElementById('hint-modal');
+                hintModal.style.display = 'none';
+            });
+
+            // Cierra los modales al hacer clic fuera de ellos
+            window.onclick = function(event) {
+                const errorModal = document.getElementById('error-modal');
+                const hintModal = document.getElementById('hint-modal');
+
+                if (event.target == errorModal) {
+                    errorModal.style.display = "none";
+                }
+                if (event.target == hintModal) {
+                    hintModal.style.display = "none";
+                }
+            };
+        });
+    </script>
+</body>
 </html>
