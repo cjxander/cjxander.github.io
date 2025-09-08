@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Feliz Cumpleaños, mi amor</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Pacifico&family=Inter:wght@400;700&display=swap');
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            color: #4b5563;
+            background-color: #f8fafc;
+        }
+
+        /* Animación del fondo degradado pastel */
+        .animated-gradient {
+            background: linear-gradient(-45deg, #fecaca, #e3b8e7, #d9a7c7, #a8d9d9);
+            background-size: 400% 400%;
+            animation: gradient-animation 15s ease infinite;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            transition: background 1.5s ease;
+        }
+
+        @keyframes gradient-animation {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* Efecto de lluvia */
+        .rain-effect {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 100;
+        }
+        
+        .raindrop {
+            position: absolute;
+            background: rgba(174,194,224,0.5);
+            width: 1px;
+            height: 20px;
+            bottom: 100%;
+            animation: fall linear infinite;
+        }
+
+        @keyframes fall {
+            to {
+                transform: translateY(100vh);
+            }
+        }
+
+        /* Título con animación de fade-in y font Pacifico */
+        .animated-title {
+            font-family: 'Pacifico', cursive;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeInAndSlide 2s ease-in-out forwards;
+        }
+
+        @keyframes fadeInAndSlide {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        /* Estilo para las fotos Polaroid */
+        .polaroid-frame {
+            background-color: white;
+            padding: 1rem 1rem 3rem 1rem;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+            border-radius: 4px;
+            position: relative;
+            transform-origin: center;
+            cursor: pointer;
+        }
+        
+        .polaroid-frame:hover {
+            transform: scale(1.05) rotate(0deg);
+            z-index: 10;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .polaroid-image {
+            width: 100%;
+            height: auto;
+            display: block;
+            filter: blur(5px);
+            transition: filter 0.6s ease-in-out, transform 0.3s ease-in-out;
+        }
+
+        .polaroid-image.unblurred {
+            filter: blur(0);
+            transform: scale(1.05);
+        }
+        
+        /* Animación de la foto al hacer clic */
+        @keyframes pop-in {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1.05); }
+        }
+
+        .polaroid-image.unblurred {
+            filter: blur(0);
+            transform: scale(1.05);
+            animation: pop-in 0.3s ease-out;
+        }
+
+        .polaroid-caption {
+            position: absolute;
+            bottom: 0.5rem;
+            left: 50%;
+            transform: translateX(-50%);
+            width: calc(100% - 2rem);
+            text-align: center;
+            font-size: 0.875rem;
+            color: #4b5563;
+        }
+
+        /* Animaciones al hacer scroll */
+        .photo-entry {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+
+        .photo-entry.is-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        /* Rotaciones para un look más natural */
+        .rotate-2 { transform: rotate(2deg); }
+        .rotate--2 { transform: rotate(-2deg); }
+        .rotate-3 { transform: rotate(3deg); }
+        .rotate--3 { transform: rotate(-3deg); }
+
+        /* Animación de brillo de pantalla */
+        @keyframes flash-fade {
+            0% { opacity: 0; }
+            50% { opacity: 0.5; }
+            100% { opacity: 0; }
+        }
+
+        .flash-effect {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: white;
+            opacity: 0;
+            animation: flash-fade 0.8s ease-out;
+            z-index: 999;
+        }
+
+        /* Carta de cumpleaños */
+        .birthday-card-container {
+            cursor: pointer;
+            transition: transform 0.3s ease-in-out;
+            margin-top: 4rem; /* Agregado para separarlo de las fotos */
+        }
+        .birthday-card-container:hover {
+            transform: scale(1.1);
+        }
+        .birthday-card {
+            width: 80px;
+            height: 80px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+        .heart-icon {
+            font-size: 3rem;
+            color: #ef4444;
+        }
+
+        /* Modal de la carta */
+        .modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            backdrop-filter: blur(5px);
+        }
+        .modal-content {
+            background-color: #fff;
+            padding: 2rem;
+            border-radius: 8px;
+            max-width: 90%;
+            max-height: 80%;
+            overflow-y: auto;
+            position: relative;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
+            animation: popInModal 0.5s ease-out;
+        }
+        @keyframes popInModal {
+            from {
+                transform: scale(0.8);
+                opacity: 0;
+            }
+            to {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+        .close-button {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: #374151;
+        }
+        .modal-message {
+            font-family: 'Pacifico', cursive;
+            text-align: center;
+            line-height: 1.6;
+            color: #4b5563;
+        }
+
+        /* Estilo y animación del botón de regalo */
+        .surprise-button {
+            display: inline-block;
+            margin-top: 1.5rem;
+            padding: 0.75rem 2rem;
+            background: linear-gradient(45deg, #FF99AA, #FF5C6F);
+            color: white;
+            font-family: 'Inter', sans-serif;
+            font-weight: bold;
+            text-decoration: none;
+            border-radius: 9999px;
+            box-shadow: 0 4px 15px rgba(255, 107, 129, 0.4);
+            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+        }
+        
+        .surprise-button:hover {
+            transform: scale(1.05);
+            box-shadow: 0 6px 20px rgba(255, 107, 129, 0.6);
+        }
+    </style>
+</head>
+<body class="bg-gray-100 min-h-screen">
+
+    <!-- Música de fondo que se reproduce al 30% de volumen -->
+    <audio id="background-music" src="nostalgia.mp3" loop autoplay preload="auto"></audio>
+
+    <!-- Fondo degradado animado -->
+    <div id="animated-gradient" class="animated-gradient"></div>
+
+    <!-- Contenido principal -->
+    <div class="relative z-10 p-8 md:p-12 lg:p-16">
+        <!-- Título principal -->
+        <header class="text-center mb-16 pt-20">
+            <h1 class="text-4xl md:text-6xl font-bold animated-title text-white">¡Nuestros Momentos Juntos!</h1>
+        </header>
+
+        <!-- Galería de Fotos con un diseño más dinámico -->
+        <div class="flex flex-col items-center space-y-24">
+            <!-- Sección 1 -->
+            <div class="photo-entry w-full max-w-4xl">
+                <div class="flex flex-col md:flex-row items-center justify-center space-y-12 md:space-y-0 md:space-x-12">
+                    <div class="polaroid-frame rotate--2 w-3/4 md:w-1/2 lg:w-1/3">
+                        <img src="1.jpg" alt="Foto 1" class="polaroid-image">
+                        <p class="polaroid-caption">TINTIN Y NOELITA JUNTITOS</p>
+                    </div>
+                    <div class="polaroid-frame rotate-3 w-3/4 md:w-1/2 lg:w-1/3">
+                        <img src="2.jpg" alt="Foto 2" class="polaroid-image">
+                        <p class="polaroid-caption">ÑEJEJE HOLI</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Sección 2 -->
+            <div class="photo-entry w-full max-w-4xl">
+                <div class="flex flex-col md:flex-row items-center justify-center space-y-12 md:space-y-0 md:space-x-12">
+                    <div class="polaroid-frame rotate-2 w-3/4 md:w-1/2 lg:w-1/3">
+                        <img src="3.jpg" alt="Foto 3" class="polaroid-image">
+                        <p class="polaroid-caption">Mira que hermosa que es mi novia</p>
+                    </div>
+                    <div class="polaroid-frame rotate--3 w-3/4 md:w-1/2 lg:w-1/3">
+                        <img src="4.jpg" alt="Foto 4" class="polaroid-image">
+                        <p class="polaroid-caption">Noelita con 19 con frio</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Sección 3 -->
+            <div class="photo-entry w-full max-w-4xl">
+                <div class="flex flex-col md:flex-row items-center justify-center space-y-12 md:space-y-0 md:space-x-12">
+                    <div class="polaroid-frame rotate-3 w-3/4 md:w-1/2 lg:w-1/3">
+                        <img src="5.jpg" alt="Foto 5" class="polaroid-image">
+                        <p class="polaroid-caption">Una de las muchisimas que se merece</p>
+                    </div>
+                    <div class="polaroid-frame rotate--2 w-3/4 md:w-1/2 lg:w-1/3">
+                        <img src="6.jpg" alt="Foto 6" class="polaroid-image">
+                        <p class="polaroid-caption">Lo más hermoso de mi vida junto a un ramo de FLORES</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Sección 4 -->
+            <div class="photo-entry w-full max-w-4xl">
+                <div class="flex flex-col md:flex-row items-center justify-center space-y-12 md:space-y-0 md:space-x-12">
+                    <div class="polaroid-frame rotate--3 w-3/4 md:w-1/2 lg:w-1/3">
+                        <img src="7.jpg" alt="Foto 7" class="polaroid-image">
+                        <p class="polaroid-caption">❤️❤️❤️</p>
+                    </div>
+                    <div class="polaroid-frame rotate-2 w-3/4 md:w-1/2 lg:w-1/3">
+                        <img src="8.jpg" alt="Foto 8" class="polaroid-image">
+                        <p class="polaroid-caption">❤️❤️❤️</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Sección 5 -->
+            <div class="photo-entry w-full max-w-4xl">
+                <div class="flex flex-col md:flex-row items-center justify-center space-y-12 md:space-y-0 md:space-x-12">
+                    <div class="polaroid-frame rotate-3 w-3/4 md:w-1/2 lg:w-1/3">
+                        <img src="9.jpg" alt="Foto 9" class="polaroid-image">
+                        <p class="polaroid-caption">Mi momento especial con mi novia</p>
+                    </div>
+                    <div class="polaroid-frame rotate--2 w-3/4 md:w-1/2 lg:w-1/3">
+                        <img src="10.jpg" alt="Foto 10" class="polaroid-image">
+                        <p class="polaroid-caption">COMIDA DE GORDITOS HERMOSOS</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Sección 6 -->
+            <div class="photo-entry w-full max-w-4xl">
+                <div class="flex flex-col md:flex-row items-center justify-center space-y-12 md:space-y-0 md:space-x-12">
+                    <div class="polaroid-frame rotate-2 w-3/4 md:w-1/2 lg:w-1/3">
+                        <img src="11.jpg" alt="Foto 11" class="polaroid-image">
+                        <p class="polaroid-caption">RICO PERO FEO CUANDO SALE</p>
+                    </div>
+                    <div class="polaroid-frame rotate--3 w-3/4 md:w-1/2 lg:w-1/3">
+                        <img src="12.jpg" alt="Foto 12" class="polaroid-image">
+                        <p class="polaroid-caption">Gracias por todo mi amor</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Carta de cumpleaños flotante -->
+            <div id="card-trigger" class="birthday-card-container">
+                <div class="birthday-card">
+                    <span class="heart-icon">❤️</span>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- Efecto de lluvia -->
+    <div id="rain-effect" class="rain-effect"></div>
+
+    <!-- Efecto de brillo de pantalla -->
+    <div id="flash-effect"></div>
+
+    <!-- Modal para la carta de cumpleaños -->
+    <div id="letter-modal" class="modal">
+        <div class="modal-content flex flex-col items-center">
+            <span id="close-modal" class="close-button">&times;</span>
+            <p class="text-xl md:text-2xl font-bold mb-4 text-center">Mi Noelita,</p>
+            <p class="modal-message text-sm md:text-base px-2">
+                Llegaste a mi vida en un año lleno de estrés, y empezaste a iluminar cada rincón con tu risa y tu belleza preciosa<br><br>Cada recuerdo en este álbum es un tesoro que guardo con todo mi ser tintinil, No hay palabras para describir la alegría que siento al compartir mis días con vos<br><br>Eres mi compañera, mi mejor amiga, mi refugio. En cada momento, en cada desafío, has sido la persona que me inspira a ser mejor y me das mucha motivación posta, Gracias por ser tan vos, por llenar mis días de magia y por cada instante que estamos viviendo<br><br>Que este cumpleaños sea solo un comienzo de sueños cumplidos que vos necesites!<br><br>Te amo, hoy y siempre. Feliz cumpleaños mi hermosa noelita
+            </p>
+            <a href="regalo2.html" class="surprise-button">Siguiente sorpresa</a>
+        </div>
+    </div>
+
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const photoEntries = document.querySelectorAll('.photo-entry');
+            const polaroidFrames = document.querySelectorAll('.polaroid-frame');
+            const flashEffect = document.getElementById('flash-effect');
+            const backgroundMusic = document.getElementById('background-music');
+            const animatedGradient = document.getElementById('animated-gradient');
+            const rainEffect = document.getElementById('rain-effect');
+            const cardTrigger = document.getElementById('card-trigger');
+            const letterModal = document.getElementById('letter-modal');
+            const closeModalBtn = document.getElementById('close-modal');
+            
+            const gradientColors = [
+                '#fecaca, #e3b8e7, #d9a7c7, #a8d9d9', // Original
+                '#a8d9d9, #d9a7c7, #fecaca, #e3b8e7',
+                '#d9a7c7, #a8d9d9, #e3b8e7, #fecaca',
+                '#e3b8e7, #fecaca, #a8d9d9, #d9a7c7',
+                '#888888, #777777, #666666, #555555', // Gris oscuro
+                '#444444, #333333, #222222, #111111', // Más oscuro
+                '#111111, #000000, #000000, #000000'  // Casi negro
+            ];
+
+            let clickedCount = 0;
+            backgroundMusic.volume = 0.3;
+
+            const observer = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('is-visible');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.1 });
+
+            photoEntries.forEach(entry => {
+                observer.observe(entry);
+            });
+
+            const numDrops = 100;
+            for (let i = 0; i < numDrops; i++) {
+                const drop = document.createElement('div');
+                drop.classList.add('raindrop');
+                drop.style.left = `${Math.random() * 100}%`;
+                drop.style.animationDelay = `${Math.random() * 5}s`;
+                drop.style.animationDuration = `${1 + Math.random()}s`;
+                rainEffect.appendChild(drop);
+            }
+
+            polaroidFrames.forEach((frame, index) => {
+                frame.addEventListener('click', () => {
+                    const image = frame.querySelector('.polaroid-image');
+                    
+                    if (image.classList.contains('unblurred')) {
+                        return;
+                    }
+
+                    image.classList.add('unblurred');
+                    
+                    flashEffect.classList.add('flash-effect');
+                    
+                    backgroundMusic.volume = Math.min(1.0, backgroundMusic.volume + 0.02);
+                    
+                    // Cambia el color del degradado basado en el índice de la foto
+                    let newGradient;
+                    if (index === 8) { // Foto 9
+                        newGradient = gradientColors[4];
+                    } else if (index === 9) { // Foto 10
+                        newGradient = gradientColors[5];
+                    } else if (index === 10) { // Foto 11
+                        newGradient = gradientColors[6];
+                    } else if (index === 11) { // Foto 12
+                        newGradient = gradientColors[7];
+                    } else {
+                        // Para las primeras 8 fotos, sigue con los degradados originales
+                        newGradient = gradientColors[clickedCount % 4];
+                        clickedCount++;
+                    }
+
+                    if (newGradient) {
+                      animatedGradient.style.background = `linear-gradient(-45deg, ${newGradient})`;
+                    }
+
+                    setTimeout(() => {
+                        flashEffect.classList.remove('flash-effect');
+                    }, 800);
+                });
+            });
+
+            // Lógica para la carta
+            cardTrigger.addEventListener('click', () => {
+                letterModal.style.display = 'flex';
+                // Pausa la música para el momento de la carta
+                backgroundMusic.pause();
+            });
+
+            closeModalBtn.addEventListener('click', () => {
+                letterModal.style.display = 'none';
+                // Reanuda la música al cerrar la carta
+                backgroundMusic.play();
+            });
+
+            // Cierra el modal si se hace clic fuera de la carta
+            letterModal.addEventListener('click', (e) => {
+                if (e.target === letterModal) {
+                    letterModal.style.display = 'none';
+                    backgroundMusic.play();
+                }
+            });
+        });
+    </script>
+
+</body>
+</html>
